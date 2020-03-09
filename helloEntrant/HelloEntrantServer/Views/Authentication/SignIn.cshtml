@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+    <body class="login">
+        <section class="container-fluid bg">
+            <section class="row justify-content-center">
+                <section class="col-12 col-sm-6 col-md-6">
+                    <form class="form-container" method="post" action="/Authentication/SignIn">
+                        <div class="form-group">
+                            <label for="UserName">Email:</label>
+                            <input type="email" class="form-control" id="UserName" name="email" aria-describedby="emailHelp" placeholder="Enter email" required="" autofocus="">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Password:</label>
+                            <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required="" autofocus="">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Sign in</button>
+                        <div class="form-group">
+                            <p>
+                                <a href="/Authentication/Register">Register as a new user</a>
+                            </p>
+                        </div>
+                    </form>
+                </section>
+            </section>
+        </section>
+    </body>
+
