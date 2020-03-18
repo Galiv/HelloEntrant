@@ -11,12 +11,9 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Test> builder)
         {
-            builder.ToTable("Test");
-            builder.HasKey(u => u.TestId);
-            //builder.HasOne(u => u.User)
-            //    .WithOne(u => u.Test)
-            //    .HasForeignKey<Test>(u => u.UserId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.ToTable("Tests");
+            builder.HasKey(t => t.TestId);
+            
         }
     }
 }

@@ -10,11 +10,11 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Core.Entities.Application> builder)
         {
-            builder.ToTable("Application");
-            builder.HasKey(u => u.Id);
-            builder.Property(u => u.UserId)
+            builder.ToTable("Applications");
+            builder.HasKey(a => a.ApplicationId);
+            builder.Property(a => a.UserId)
                 .IsRequired();
-            builder.Property(u => u.SpecialityId)
+            builder.Property(a => a.SpecialityId)
                 .IsRequired();
         }
     }

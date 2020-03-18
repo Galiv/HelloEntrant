@@ -11,8 +11,8 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<University> builder)
         {
-            builder.ToTable("University");
-            builder.HasKey(u => u.Id);
+            builder.ToTable("Universities");
+            builder.HasKey(u => u.UniversityId);
             builder.Property(u => u.Name)
                 .IsRequired();
             builder.Property(u => u.City)

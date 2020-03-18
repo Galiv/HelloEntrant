@@ -8,17 +8,17 @@ namespace HelloEntrantServer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Application",
+                name: "Applications",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    ApplicationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     SpecialityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Application", x => x.Id);
+                    table.PrimaryKey("PK_Applications", x => x.ApplicationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,26 +36,7 @@ namespace HelloEntrantServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Speciality",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    BudgetPlace = table.Column<int>(nullable: false),
-                    PaidPlace = table.Column<int>(nullable: false),
-                    testNeeded1 = table.Column<string>(nullable: false),
-                    testNeeded2 = table.Column<string>(nullable: false),
-                    testNeeded3 = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Speciality", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Test",
+                name: "Tests",
                 columns: table => new
                 {
                     TestId = table.Column<int>(nullable: false)
@@ -74,7 +55,7 @@ namespace HelloEntrantServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Test", x => x.TestId);
+                    table.PrimaryKey("PK_Tests", x => x.TestId);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,9 +108,9 @@ namespace HelloEntrantServer.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Test_TestId",
+                        name: "FK_Users_Tests_TestId",
                         column: x => x.TestId,
-                        principalTable: "Test",
+                        principalTable: "Tests",
                         principalColumn: "TestId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -223,14 +204,14 @@ namespace HelloEntrantServer.Migrations
                 name: "Documents",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    DocumentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Documents", x => x.Id);
+                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
                     table.ForeignKey(
                         name: "FK_Documents_Users_UserId",
                         column: x => x.UserId,
@@ -240,14 +221,13 @@ namespace HelloEntrantServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "University",
+                name: "Universities",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    UniversityId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: false),
                     DocumentId = table.Column<int>(nullable: false),
                     Latitude = table.Column<string>(nullable: false),
@@ -255,41 +235,65 @@ namespace HelloEntrantServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_University", x => x.Id);
+                    table.PrimaryKey("PK_Universities", x => x.UniversityId);
                     table.ForeignKey(
-                        name: "FK_University_Documents_DocumentId",
+                        name: "FK_Universities_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
-                        principalColumn: "Id",
+                        principalColumn: "DocumentId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Faculty",
+                name: "Faculties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    FacultyId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
                     DocumentId = table.Column<int>(nullable: false),
                     UniversityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Faculty", x => x.Id);
+                    table.PrimaryKey("PK_Faculties", x => x.FacultyId);
                     table.ForeignKey(
-                        name: "FK_Faculty_Documents_DocumentId",
+                        name: "FK_Faculties_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
-                        principalColumn: "Id",
+                        principalColumn: "DocumentId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Faculty_University_UniversityId",
+                        name: "FK_Faculties_Universities_UniversityId",
                         column: x => x.UniversityId,
-                        principalTable: "University",
-                        principalColumn: "Id");
+                        principalTable: "Universities",
+                        principalColumn: "UniversityId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Specialities",
+                columns: table => new
+                {
+                    SpecialityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false),
+                    BudgetPlaceNumber = table.Column<int>(nullable: false),
+                    PaidPlaceNumber = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    testNeeded1 = table.Column<string>(nullable: false),
+                    testNeeded2 = table.Column<string>(nullable: false),
+                    testNeeded3 = table.Column<string>(nullable: false),
+                    FacultyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialities", x => x.SpecialityId);
+                    table.ForeignKey(
+                        name: "FK_Specialities_Faculties_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "Faculties",
+                        principalColumn: "FacultyId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -325,18 +329,23 @@ namespace HelloEntrantServer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculty_DocumentId",
-                table: "Faculty",
+                name: "IX_Faculties_DocumentId",
+                table: "Faculties",
                 column: "DocumentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculty_UniversityId",
-                table: "Faculty",
+                name: "IX_Faculties_UniversityId",
+                table: "Faculties",
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_University_DocumentId",
-                table: "University",
+                name: "IX_Specialities_FacultyId",
+                table: "Specialities",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Universities_DocumentId",
+                table: "Universities",
                 column: "DocumentId");
 
             migrationBuilder.CreateIndex(
@@ -362,7 +371,7 @@ namespace HelloEntrantServer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Application");
+                name: "Applications");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -380,16 +389,16 @@ namespace HelloEntrantServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Faculty");
-
-            migrationBuilder.DropTable(
-                name: "Speciality");
+                name: "Specialities");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "University");
+                name: "Faculties");
+
+            migrationBuilder.DropTable(
+                name: "Universities");
 
             migrationBuilder.DropTable(
                 name: "Documents");
@@ -398,7 +407,7 @@ namespace HelloEntrantServer.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Test");
+                name: "Tests");
         }
     }
 }
