@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HelloEntrantServer.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class InitMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -119,9 +119,8 @@ namespace HelloEntrantServer.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
                     City = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
                     TestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloEntrantServer.Migrations
 {
     [DbContext(typeof(helloEntrantContex))]
-    [Migration("20200317202259_InitMigration")]
-    partial class InitMigration
+    [Migration("20200318141608_InitMig")]
+    partial class InitMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -255,9 +255,6 @@ namespace HelloEntrantServer.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
