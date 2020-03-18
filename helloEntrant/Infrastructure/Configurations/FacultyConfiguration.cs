@@ -11,21 +11,19 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Faculty> builder)
         {
-            builder.ToTable("Faculty");
-            builder.HasKey(u => u.Id);
-            builder.Property(u => u.Name)
+            builder.ToTable("Faculties");
+            builder.HasKey(f => f.FacultyId);
+            builder.Property(f => f.Name)
                 .IsRequired();
-            builder.Property(u => u.Address)
+            builder.Property(f => f.Address)
+                .IsRequired();            
+            builder.Property(f => f.DocumentId)
                 .IsRequired();
-            builder.Property(u => u.Description)
+            builder.Property(f => f.UniversityId)
                 .IsRequired();
-            builder.Property(u => u.DocumentId)
-                .IsRequired();
-            builder.Property(u => u.UniversityId)
-                .IsRequired();
-            builder.HasOne(u => u.University)
-                .WithMany(u => u.Faculties)
-                .HasForeignKey(u => u.UniversityId)
+            builder.HasOne(f => f.University)
+                .WithMany(f => f.Faculties)
+                .HasForeignKey(f => f.UniversityId)
                 .OnDelete(DeleteBehavior.NoAction);
            // builder.HasOne(u => u.Document);
         }

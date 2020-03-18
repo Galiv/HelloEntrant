@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloEntrantServer.Migrations
 {
     [DbContext(typeof(helloEntrantContex))]
-    [Migration("20200317202259_InitMigration")]
-    partial class InitMigration
+    [Migration("20200318150727_InitMig")]
+    partial class InitMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace HelloEntrantServer.Migrations
 
             modelBuilder.Entity("Core.Entities.Application", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ApplicationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -35,14 +35,14 @@ namespace HelloEntrantServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ApplicationId");
 
-                    b.ToTable("Application");
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("Core.Entities.Document", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DocumentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -54,7 +54,7 @@ namespace HelloEntrantServer.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DocumentId");
 
                     b.HasIndex("UserId");
 
@@ -63,16 +63,12 @@ namespace HelloEntrantServer.Migrations
 
             modelBuilder.Entity("Core.Entities.Faculty", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("FacultyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -86,34 +82,37 @@ namespace HelloEntrantServer.Migrations
                     b.Property<int>("UniversityId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("FacultyId");
 
                     b.HasIndex("DocumentId");
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculty");
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("Core.Entities.Speciality", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SpecialityId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BudgetPlace")
+                    b.Property<int>("BudgetPlaceNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaidPlace")
+                    b.Property<int>("PaidPlaceNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("testNeeded1")
@@ -128,9 +127,11 @@ namespace HelloEntrantServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SpecialityId");
 
-                    b.ToTable("Speciality");
+                    b.HasIndex("FacultyId");
+
+                    b.ToTable("Specialities");
                 });
 
             modelBuilder.Entity("Core.Entities.Test", b =>
@@ -175,12 +176,12 @@ namespace HelloEntrantServer.Migrations
 
                     b.HasKey("TestId");
 
-                    b.ToTable("Test");
+                    b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("Core.Entities.University", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UniversityId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -191,9 +192,6 @@ namespace HelloEntrantServer.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DocumentId")
@@ -211,11 +209,11 @@ namespace HelloEntrantServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UniversityId");
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("University");
+                    b.ToTable("Universities");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -255,9 +253,6 @@ namespace HelloEntrantServer.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
@@ -456,6 +451,15 @@ namespace HelloEntrantServer.Migrations
                     b.HasOne("Core.Entities.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.Speciality", b =>
+                {
+                    b.HasOne("Core.Entities.Faculty", "Faculty")
+                        .WithMany("Specialities")
+                        .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });

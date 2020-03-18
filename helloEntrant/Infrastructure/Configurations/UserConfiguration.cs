@@ -14,7 +14,7 @@ namespace Infrastructure.Configurations
             builder.ToTable("Users");
             builder.Property(u => u.Email)
                 .IsRequired();
-            builder.HasOne(z => z.Test)
+            builder.HasOne(u => u.Test)
                 .WithOne(u => u.User)
                 .HasForeignKey<User>(u => u.TestId)
                 .OnDelete(DeleteBehavior.Cascade);

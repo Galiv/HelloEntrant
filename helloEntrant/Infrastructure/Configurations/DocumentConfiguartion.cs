@@ -12,12 +12,12 @@ namespace Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Document> builder)
         {
             builder.ToTable("Documents");
-            builder.HasKey(u => u.Id);
-            builder.Property(u => u.Name)
+            builder.HasKey(d => d.DocumentId);
+            builder.Property(d => d.Name)
                 .IsRequired();
-            builder.HasOne(u => u.User)
+            builder.HasOne(d => d.User)
                 .WithMany(d => d.Documents)
-                .HasForeignKey(k => k.UserId)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
