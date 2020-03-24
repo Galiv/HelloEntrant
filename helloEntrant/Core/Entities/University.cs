@@ -15,6 +15,9 @@ namespace Core.Entities
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public ICollection<Faculty> Faculties { get; set; } = new List<Faculty>();
+        public string UserId { get; set; }
+        public User User { get; set; }
+        
 
     }
 }

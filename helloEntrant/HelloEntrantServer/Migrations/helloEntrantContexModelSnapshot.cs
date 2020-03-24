@@ -207,9 +207,14 @@ namespace HelloEntrantServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("UniversityId");
 
                     b.HasIndex("DocumentId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Universities");
                 });
@@ -469,6 +474,10 @@ namespace HelloEntrantServer.Migrations
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>

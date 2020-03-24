@@ -38,6 +38,7 @@ namespace HelloEntrantServer.Controllers
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "User");
+                   // result.
                 }
                 else
                 {
@@ -47,6 +48,7 @@ namespace HelloEntrantServer.Controllers
 
             return View();
         }
+
 
         //returns the page where the user need to enter his email and password
         [HttpGet]
