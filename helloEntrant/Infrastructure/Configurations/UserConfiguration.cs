@@ -18,6 +18,7 @@ namespace Infrastructure.Configurations
                 .WithOne(u => u.User)
                 .HasForeignKey<User>(u => u.TestId)
                 .OnDelete(DeleteBehavior.Cascade);
+            
         }
     }
 }

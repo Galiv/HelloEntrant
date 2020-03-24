@@ -25,6 +25,9 @@ namespace Infrastructure.Configurations
                    .IsRequired();
             builder.HasOne(u => u.Document);
 
+            builder.HasOne(u => u.User);               
+               
+
 
         }
     }

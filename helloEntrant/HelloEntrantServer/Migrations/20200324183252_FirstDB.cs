@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HelloEntrantServer.Migrations
 {
-    public partial class InitMig : Migration
+    public partial class FirstDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -231,7 +231,8 @@ namespace HelloEntrantServer.Migrations
                     Address = table.Column<string>(nullable: false),
                     DocumentId = table.Column<int>(nullable: false),
                     Latitude = table.Column<string>(nullable: false),
-                    Longitude = table.Column<string>(nullable: false)
+                    Longitude = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -242,6 +243,12 @@ namespace HelloEntrantServer.Migrations
                         principalTable: "Documents",
                         principalColumn: "DocumentId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Universities_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -347,6 +354,11 @@ namespace HelloEntrantServer.Migrations
                 name: "IX_Universities_DocumentId",
                 table: "Universities",
                 column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Universities_UserId",
+                table: "Universities",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

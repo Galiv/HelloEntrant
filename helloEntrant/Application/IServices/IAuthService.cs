@@ -15,4 +15,6 @@ namespace Application.IServices
         Task<IdentityResult> Register(RegisterRequest model);
         Task<User> FindByNameAsync(string name);
     }
+
+
 }

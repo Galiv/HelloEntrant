@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Application.IServices;
+using Core;
 using Core.Entities;
 using Infrastructure;
 using Infrastructure.Services;
@@ -31,6 +32,8 @@ namespace HelloEntrantServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ISuperAdminService, SuperAdminService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
             services.AddDbContext<helloEntrantContex>(options =>
@@ -62,7 +65,7 @@ namespace HelloEntrantServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, helloEntrantContex contex )
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +83,8 @@ namespace HelloEntrantServer
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            DataInitializer.SeedData(userManager, roleManager, contex).Wait();
 
             app.UseEndpoints(endpoints =>
             {
