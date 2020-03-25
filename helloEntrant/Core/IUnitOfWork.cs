@@ -8,12 +8,14 @@ namespace Core
 {
     public interface IUnitOfWork
     {
-       // IConversationInfoRepository ConversationInfoRepository { get; }
-       // IMessageRepository MessageRepository { get; }
+        // IConversationInfoRepository ConversationInfoRepository { get; }
+        // IMessageRepository MessageRepository { get; }
         IUserRepository UserRepository { get; }
-       // IConversationRepository ConversationRepository { get; }
-      //  IBlockedUserRepository BlockedUserRepository { get; }
-       // IUserConversationRepository UserConversationRepository { get; }
+        // IConversationRepository ConversationRepository { get; }
+        //  IBlockedUserRepository BlockedUserRepository { get; }
+        // IUserConversationRepository UserConversationRepository { get; }
 
         Task Commit();
     }
+
+}
