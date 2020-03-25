@@ -9,8 +9,8 @@ namespace Application.IServices
 {
     public interface ISuperAdminService
     {
-        Task<bool> AddNewUniversity(AddUniRequest request);
+        Task AddNewUniversity(AddUniRequest request);
 
-        List<University> GetUniversities();
+        Task<List<University>> GetUniversities();
     }
 }
