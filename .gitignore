@@ -59,6 +59,9 @@ artifacts/
 # StyleCop
 StyleCopReport.xml
 
+# appsettings.json
+*/appsettings.json
+
 # Files built by Visual Studio
 *_i.c
 *_p.c
@@ -206,6 +209,7 @@ BundleArtifacts/
 Package.StoreAssociation.xml
 _pkginfo.txt
 *.appx
+
 
 # Visual Studio cache files
 # files ending in .cache can be ignored
