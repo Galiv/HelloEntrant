@@ -9,6 +9,7 @@ using Core.Entities;
 using Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
+using Core;
 
 namespace Infrastructure.Services
 {
@@ -16,19 +17,19 @@ namespace Infrastructure.Services
     {
         UserManager<User> userManager;
         SignInManager<User> signInManager;
-        helloEntrantContex dbContext;
+        private readonly IUnitOfWork unitOfWork;
 
-        public SuperAdminService(UserManager<User> userManager, SignInManager<User> signInManager, helloEntrantContex dbContext)
+        public SuperAdminService(UserManager<User> userManager, SignInManager<User> signInManager, IUnitOfWork unitOfWork)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.dbContext = dbContext;
+            this.unitOfWork = unitOfWork;
         }
 
-        public List<University> GetUniversities()
+        public async Task<List<University>> GetUniversities()
         {
-            var unis = (from uni in dbContext.Universities
-                        join user in dbContext.Users 
+            var unis = (from uni in await unitOfWork.UniversityRepository.GetAllAsync()
+                        join user in await unitOfWork.UserRepository.GetAllAsync()
                         on uni.UserId equals user.Id
                         select new University()
                         {Name = uni.Name, User = user}).ToList();
@@ -36,7 +37,7 @@ namespace Infrastructure.Services
             return unis;
         }
 
-        public async Task<bool> AddNewUniversity(AddUniRequest request)
+        public async Task AddNewUniversity(AddUniRequest request)
         {
             User user = new User
             {
@@ -58,10 +59,10 @@ namespace Infrastructure.Services
                 UserId = user.Id
             };
 
-            await dbContext.Universities.AddAsync(university);
-            var dbSuccess = await dbContext.SaveChangesAsync();
+            await unitOfWork.UniversityRepository.CreateAsync(university);
+            await unitOfWork.Commit();
 
-            return dbSuccess == 1;
+            //return dbSuccess == 1;
         }
 
         
