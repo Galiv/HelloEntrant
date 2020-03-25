@@ -207,6 +207,9 @@ Package.StoreAssociation.xml
 _pkginfo.txt
 *.appx
 
+# appsettings.json
+appsettings.json
+
 # Visual Studio cache files
 # files ending in .cache can be ignored
 *.[Cc]ache
