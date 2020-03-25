@@ -11,7 +11,7 @@ namespace ApplicationTest.SuperAdminServiceTests
         public void CreateUniversity_SaveChanges_ShouldInvokesOnce()
         {
             //arrange
-            var fixture = new fixture
+           // var fixture = new fixture
             //act
             //assert
         }
