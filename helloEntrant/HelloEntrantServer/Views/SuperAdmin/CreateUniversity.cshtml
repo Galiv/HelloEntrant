@@ -3,23 +3,32 @@
     ViewData["Title"] = "CreateUniversity";
 }
 
-<h1>Create University</h1>
+    <div class="create-university">
+        <div class="container">
+            <h1>Create University </h1>
+            <form>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">University name:</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                    <small id="emailHelp" class="form-text text-muted"></small>
 
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Admin name: </label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Password:</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Confirm password:</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                </div>
 
-<div class="NewInput">
-    <form>
-        <label>UNIVERSITY Name:</label>
-        <input type="text" placeholder="Input">
-        <br>
-        <label>Admin Name:</label>
-        <input type="text" placeholder="Input">
-        <br>
-        <label>Password:</label>
-        <input type="text" placeholder="Input">
-        <br>
-        <label>Confirm Password:</label>
-        <input type="text" placeholder="Input">
-        <br>
-    </form>
-    <button>Submit</button><button>Cancel</button>
-</div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Cancel</button>
+
+            </form>
+        </div>
+    </div>

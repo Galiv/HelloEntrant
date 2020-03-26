@@ -70,3 +70,11 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+
+.create-university {
+    text-align:center ;
+}
+
+.create-university .container{
+    width: 420px;
+}
