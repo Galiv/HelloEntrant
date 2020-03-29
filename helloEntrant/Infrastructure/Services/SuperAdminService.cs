@@ -50,7 +50,7 @@ namespace Infrastructure.Services
             if (success.Succeeded == true)
             {
                 await userManager.AddToRoleAsync(user, "Administrator");
-                await signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
+                //await signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
             }
 
             University university = new University()
@@ -61,13 +61,6 @@ namespace Infrastructure.Services
 
             await unitOfWork.UniversityRepository.CreateAsync(university);
             await unitOfWork.Commit();
-
-            //return dbSuccess == 1;
         }
-
-        
-
-
-
     }
 }

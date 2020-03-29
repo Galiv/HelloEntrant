@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.DTOs.SuperAdmin;
 using Application.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,6 @@ namespace HelloEntrantServer.Controllers
         {
             return View();
         }
-        public ActionResult Universities()
-        {
-            var unis = SuperAdminService.GetUniversities();
-            return View(unis);
-        }
 
         [HttpGet]
         [Authorize(Roles = "SuperAdmin")]
@@ -32,5 +28,22 @@ namespace HelloEntrantServer.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateUniversity(AddUniRequest request)
+        {   
+            if (request != null)
+            {
+                await SuperAdminService.AddNewUniversity(request).ConfigureAwait(true);
+                return RedirectToAction("ManageUniversities", "SuperAdmin");
+            }
+
+            return RedirectToAction("CreateUniversity", "SuperAdmin");
+        }
+
+        public ActionResult ManageUniversities()
+        {
+            var unis = SuperAdminService.GetUniversities();
+            return View(unis.Result);
+        }
     }
 }

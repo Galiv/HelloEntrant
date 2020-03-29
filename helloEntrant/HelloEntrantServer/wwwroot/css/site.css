@@ -71,41 +71,10 @@ body {
 }
 
 
-/*Taras css*/
-
-* {
-    margin: 15px;
-    padding: 15px;
-    font-size: 25px;
+.create-university {
+    text-align:center ;
 }
 
-body {
-    border: 3px solid black;
+.create-university .container{
+    width: 420px;
 }
-
-ul {
-    list-style-type: none;
-    display: inline-flex;
-}
-
-li {
-    border: 3px solid black
-}
-
-table, th, td {
-    border: 3px solid black;
-    border-collapse: collapse;
-}
-
-    table th {
-        background-color: salmon;
-    }
-
-.FacultyInput {
-    float: left;
-}
-
-.PersonalInformation {
-    float: left;
-}
-

@@ -3,23 +3,32 @@
     ViewData["Title"] = "CreateUniversity";
 }
 
-<h1>Create University</h1>
+    <div class="create-university">
+        <div class="container">
+            <h1>Create University </h1>
+            <form name="my-form" autocomplete="off" action="/SuperAdmin/CreateUniversity" method="post">
 
+                <div class="form-group">
+                    <label for="UniversityName">University name</label>
+                    <input type="text" class="form-control" name="UniversityName" placeholder="University name" required>
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
 
-<div class="NewInput">
-    <form>
-        <label>University Name:</label>
-        <input type="text" placeholder="Input">
-        <br>
-        <label>Admin Name:</label>
-        <input type="text" placeholder="Input">
-        <br>
-        <label>Password:</label>
-        <input type="text" placeholder="Input">
-        <br>
-        <label>Confirm Password:</label>
-        <input type="text" placeholder="Input">
-        <br>
-    </form>
-    <button>Submit</button><button>Cancel</button>
-</div>
+                <div class="form-group">
+                    <label for="Email">Administrator's email</label>
+                    <input type="text" class="form-control" name="Email" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="password" class="form-control" name="Password" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="ConfirmPassword">ConfirmPassword</label>
+                    <input type="password" class="form-control" name="ConfirmPassword" placeholder="" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+        </div>
+    </div>

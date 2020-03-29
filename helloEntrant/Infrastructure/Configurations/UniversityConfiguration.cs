@@ -15,20 +15,10 @@ namespace Infrastructure.Configurations
             builder.HasKey(u => u.UniversityId);
             builder.Property(u => u.Name)
                 .IsRequired();
-            builder.Property(u => u.City)
-                .IsRequired();
-            builder.Property(u => u.Address)
-                .IsRequired();
-            builder.Property(u => u.Latitude)
-                .IsRequired();
-            builder.Property(u => u.Longitude)
-                   .IsRequired();
-            builder.HasOne(u => u.Document);
-
-            builder.HasOne(u => u.User);               
-               
-
-
+            builder.HasOne(u => u.User)
+                .WithOne(u => u.University)
+                .HasForeignKey<University>(u => u.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

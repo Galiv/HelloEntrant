@@ -185,22 +185,18 @@ namespace HelloEntrantServer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DocumentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Latitude")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Longitude")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -212,9 +208,9 @@ namespace HelloEntrantServer.Migrations
 
                     b.HasKey("UniversityId");
 
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Universities");
                 });
@@ -469,15 +465,10 @@ namespace HelloEntrantServer.Migrations
 
             modelBuilder.Entity("Core.Entities.University", b =>
                 {
-                    b.HasOne("Core.Entities.Document", "Document")
-                        .WithMany()
-                        .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithOne("University")
+                        .HasForeignKey("Core.Entities.University", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>

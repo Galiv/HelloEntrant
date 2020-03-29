@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HelloEntrantServer.Migrations
 {
-    public partial class FirstDB : Migration
+    public partial class InitDataBase2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -227,28 +227,21 @@ namespace HelloEntrantServer.Migrations
                     UniversityId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    DocumentId = table.Column<int>(nullable: false),
-                    Latitude = table.Column<string>(nullable: false),
-                    Longitude = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    DocumentId = table.Column<int>(nullable: true),
+                    Latitude = table.Column<string>(nullable: true),
+                    Longitude = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Universities", x => x.UniversityId);
                     table.ForeignKey(
-                        name: "FK_Universities_Documents_DocumentId",
-                        column: x => x.DocumentId,
-                        principalTable: "Documents",
-                        principalColumn: "DocumentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Universities_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -351,14 +344,11 @@ namespace HelloEntrantServer.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Universities_DocumentId",
-                table: "Universities",
-                column: "DocumentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Universities_UserId",
                 table: "Universities",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -410,10 +400,10 @@ namespace HelloEntrantServer.Migrations
                 name: "Faculties");
 
             migrationBuilder.DropTable(
-                name: "Universities");
+                name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "Universities");
 
             migrationBuilder.DropTable(
                 name: "Users");

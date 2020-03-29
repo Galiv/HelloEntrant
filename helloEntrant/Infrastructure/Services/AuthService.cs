@@ -31,7 +31,7 @@ namespace Infrastructure.Services
         public async Task<SignInResult> SignIn(SignInRequest model)
         {
             //role = _rolemanager.
-            return await _signinmanager.PasswordSignInAsync(model.email, model.password, false, false);
+           return await _signinmanager.PasswordSignInAsync(model.email, model.password, false, false);
         }
 
         public async Task<IdentityResult> Register(RegisterRequest model)
