@@ -34,6 +34,7 @@ namespace HelloEntrantServer
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISuperAdminService, SuperAdminService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserManager, UserOrganizer>();
 
             services.AddControllersWithViews();
             services.AddDbContext<helloEntrantContex>(options =>
@@ -44,6 +45,8 @@ namespace HelloEntrantServer
             services.AddIdentity<User, IdentityRole>()
            .AddEntityFrameworkStores<helloEntrantContex>()
            .AddDefaultTokenProviders();
+
+            
 
 
             
