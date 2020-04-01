@@ -4,6 +4,7 @@ using AutoFixture.AutoMoq;
 using Core;
 using Core.Entities;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -20,14 +21,14 @@ namespace ApplicationTest.SuperAdminServiceTests
             //arrange
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             var mockUnitOfWork = fixture.Freeze<Mock<IUnitOfWork>>();
+            var mockUserManager = fixture.Freeze<Mock<UserManager<User>>>();
             var superAdminService = fixture.Create<SuperAdminService>();
             //act
-
             await superAdminService.AddNewUniversity(fixture.Create<AddUniRequest>());
 
             //assert
 
-            mockUnitOfWork.Verify(unit => unit.UniversityRepository.CreateAsync(It.IsAny<University>()),Times.Once);
+            mockUnitOfWork.Verify(unit => unit.UniversityRepository.CreateAsync(It.IsAny<University>()), Times.Once);
         }
 
         [Fact]
@@ -36,6 +37,7 @@ namespace ApplicationTest.SuperAdminServiceTests
             //arrangem
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             var mockUnitOfWork = fixture.Freeze<Mock<IUnitOfWork>>();
+            var mockUserManager = fixture.Freeze<Mock<UserManager<User>>>();
             var superAdminService = fixture.Create<SuperAdminService>();
             //act
 

@@ -15,14 +15,15 @@ namespace Infrastructure.Services
 {
     public class SuperAdminService : ISuperAdminService
     {
-        UserManager<User> userManager;
-        SignInManager<User> signInManager;
+        IUserManager userManager;
+
+        //SignInManager<User> signInManager;
         private readonly IUnitOfWork unitOfWork;
 
-        public SuperAdminService(UserManager<User> userManager, SignInManager<User> signInManager, IUnitOfWork unitOfWork)
+        public SuperAdminService(IUserManager userManager, IUnitOfWork unitOfWork)
         {
             this.userManager = userManager;
-            this.signInManager = signInManager;
+            //this.signInManager = signInManager;
             this.unitOfWork = unitOfWork;
         }
 
