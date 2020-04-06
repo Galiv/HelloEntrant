@@ -1,8 +1,11 @@
 ﻿using Core.Entities;
 using Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -10,7 +13,11 @@ namespace Infrastructure.Repositories
     {
        public UserRepository(helloEntrantContex contex):base (contex)
         {
-
+            
+        }
+        public Task<User> getUserWithUniversity (string userId)
+        {
+            return db.Users.Where(u => u.Id == userId).Include(u => u.University).FirstOrDefaultAsync();
         }
     }
 }

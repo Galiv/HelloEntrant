@@ -70,9 +70,6 @@ namespace HelloEntrantServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DocumentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -81,8 +78,6 @@ namespace HelloEntrantServer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("FacultyId");
-
-                    b.HasIndex("DocumentId");
 
                     b.HasIndex("UniversityId");
 
@@ -441,12 +436,6 @@ namespace HelloEntrantServer.Migrations
 
             modelBuilder.Entity("Core.Entities.Faculty", b =>
                 {
-                    b.HasOne("Core.Entities.Document", "Document")
-                        .WithMany()
-                        .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")

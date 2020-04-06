@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HelloEntrantServer.Migrations
 {
-    public partial class InitDataBase2 : Migration
+    public partial class initDB3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -229,7 +229,7 @@ namespace HelloEntrantServer.Migrations
                     Name = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
-                    DocumentId = table.Column<int>(nullable: true),
+                    DocumentId = table.Column<int>(nullable: false),
                     Latitude = table.Column<string>(nullable: true),
                     Longitude = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
@@ -252,18 +252,11 @@ namespace HelloEntrantServer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
-                    DocumentId = table.Column<int>(nullable: false),
                     UniversityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Faculties", x => x.FacultyId);
-                    table.ForeignKey(
-                        name: "FK_Faculties_Documents_DocumentId",
-                        column: x => x.DocumentId,
-                        principalTable: "Documents",
-                        principalColumn: "DocumentId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Faculties_Universities_UniversityId",
                         column: x => x.UniversityId,
@@ -329,11 +322,6 @@ namespace HelloEntrantServer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculties_DocumentId",
-                table: "Faculties",
-                column: "DocumentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Faculties_UniversityId",
                 table: "Faculties",
                 column: "UniversityId");
@@ -391,6 +379,9 @@ namespace HelloEntrantServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Documents");
+
+            migrationBuilder.DropTable(
                 name: "Specialities");
 
             migrationBuilder.DropTable(
@@ -398,9 +389,6 @@ namespace HelloEntrantServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Faculties");
-
-            migrationBuilder.DropTable(
-                name: "Documents");
 
             migrationBuilder.DropTable(
                 name: "Universities");
