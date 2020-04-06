@@ -7,7 +7,8 @@ using System.Text;
 namespace Core.Entities
 {
     public class User : IdentityUser
-    {    
+    {
+        public static object Identity { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }
