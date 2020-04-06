@@ -16,9 +16,7 @@ namespace Infrastructure.Configurations
             builder.Property(f => f.Name)
                 .IsRequired();
             builder.Property(f => f.Address)
-                .IsRequired();            
-            builder.Property(f => f.DocumentId)
-                .IsRequired();
+                .IsRequired();                
             builder.Property(f => f.UniversityId)
                 .IsRequired();
             builder.HasOne(f => f.University)

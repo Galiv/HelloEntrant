@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloEntrantServer.Migrations
 {
     [DbContext(typeof(helloEntrantContex))]
-    [Migration("20200329125829_InitDataBase2")]
-    partial class InitDataBase2
+    [Migration("20200406193651_initDB3")]
+    partial class initDB3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,9 +72,6 @@ namespace HelloEntrantServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DocumentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -83,8 +80,6 @@ namespace HelloEntrantServer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("FacultyId");
-
-                    b.HasIndex("DocumentId");
 
                     b.HasIndex("UniversityId");
 
@@ -443,12 +438,6 @@ namespace HelloEntrantServer.Migrations
 
             modelBuilder.Entity("Core.Entities.Faculty", b =>
                 {
-                    b.HasOne("Core.Entities.Document", "Document")
-                        .WithMany()
-                        .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")

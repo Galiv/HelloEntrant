@@ -33,6 +33,7 @@ namespace HelloEntrantServer
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISuperAdminService, SuperAdminService>();
+            services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserManager, UserOrganizer>();
 
