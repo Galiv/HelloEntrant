@@ -34,7 +34,7 @@ namespace ApplicationTest.SuperAdminServiceTests
         [Fact]
         public async void CreateUniversity_SaveChanges_ShouldInvokesOnce()
         {
-            //arrangem
+            //arrange
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             var mockUnitOfWork = fixture.Freeze<Mock<IUnitOfWork>>();
             var mockUserManager = fixture.Freeze<Mock<UserManager<User>>>();
