@@ -14,6 +14,7 @@ namespace HelloEntrantServer.Controllers
     public class AdministratorController : Controller
     {
         public IAdministratorService AdministratorService { get; }
+        
 
         public AdministratorController(IAdministratorService AdministratorService)
         {
@@ -24,8 +25,6 @@ namespace HelloEntrantServer.Controllers
         {
             return View();
         }
-
-
         [HttpPost]
         public async Task<IActionResult> CreateFaculty(CreateFaculty faculty)
         {
@@ -33,6 +32,12 @@ namespace HelloEntrantServer.Controllers
 
             await AdministratorService.CreateFaculty(faculty);
 
+            return View();
+        }
+        public async Task<IActionResult> CreateSpeciality()
+        {            
+            ViewBag.Faculties = await this.AdministratorService.GetFaculties(
+                await this.AdministratorService.GetUniversityId(User.Identity.Name));
             return View();
         }
 
