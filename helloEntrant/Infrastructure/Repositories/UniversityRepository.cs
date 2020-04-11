@@ -1,8 +1,10 @@
 ﻿using Core.Entities;
 using Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -12,5 +14,10 @@ namespace Infrastructure.Repositories
         {
 
         }
+        public Task<List<University>> getAllWithUsers()
+        {
+            return this.db.Universities.Include(u => u.User).ToListAsync();
+        }
+
     }
 }

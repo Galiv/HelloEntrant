@@ -44,6 +44,7 @@ namespace Infrastructure.Services
             {
                 Email = request.Email,
                 UserName = request.Email
+
             };
 
             var success = await userManager.CreateAsync(user, request.Password);
@@ -57,7 +58,9 @@ namespace Infrastructure.Services
             University university = new University()
             {
                 Name = request.UniversityName,
+                //User = user,
                 UserId = user.Id
+                
             };
 
             await unitOfWork.UniversityRepository.CreateAsync(university);
