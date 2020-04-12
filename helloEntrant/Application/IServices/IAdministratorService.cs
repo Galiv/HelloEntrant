@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.DTOs.Administrator;
 using Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,8 @@ namespace Application.IServices
         Task CreateFaculty(CreateFaculty request);
         Task<List<Faculty>> GetFaculties(int UniversityId);
         Task<int> GetUniversityId(string UserId);
+        Task CreateSpeciality(CreateSpeciality request);
+
+        //public Faculty GetFaculty(string faculty);
     }
 }

@@ -3,99 +3,54 @@
     ViewData["Title"] = "CreateSpeciality";
 }
 
-@*<h1>CreateSpeciality</h1>
+<h1>CreateSpeciality</h1>
 
 
-    <div>
-        <form action="/Administrator/CreateSpeiality" method="post">
-            <label>Faculty:</label>
-            <select>
+<div>
+    <form action="/Administrator/CreateSpeciality" method="post">
+        <label>Faculty:</label>
+        <select name="FucaltyName">
+            @if (ViewBag.Faculties != null)
+            {
                 @foreach (var item in ViewBag.Faculties)
                 {
                     <option>
                         @item.Name
                     </option>
                 }
+            }
+
         </select>
-        <br />
+    <br />
 
-        <label>Name of Speciality:</label>
-        <input type="text" placeholder="Speciality" name="SpecialityName">
-        <br />
+    <label>Name of Speciality:</label>
+    <input type="text" placeholder="Speciality" name="SpecialityName">
+    <br />
 
-        <label>Budget place:</label>
-        <input type="text" placeholder="Budgetplace" name="BudgetPlace">
-        <br />
+    <label>Description:</label>
+    <input type="text" placeholder="Description" name="Description">
+    <br />
 
-        <label>Paid place:</label>
-        <input type="text" placeholder="PaidPlace" name="PaidPlace">
-        <br />
+    <label>Budget place:</label>
+    <input type="text" placeholder="Budgetplace" name="BudgetPlaceNumber">
+    <br />
 
-        <label>ZNO1:</label>
-        <input type="text" placeholder="zno1" name="zno1">
-        <br />
+    <label>Paid place:</label>
+    <input type="text" placeholder="PaidPlace" name="PaidPlaceNumber">
+    <br />
 
-        <label>ZNO2:</label>
-        <input type="text" placeholder="zno2" name="zno2">
-        <br />
+    <label>ZNO1:</label>
+    <input type="text" placeholder="zno1" name="TestNeeded1">
+    <br />
 
-        <label>ZNO3:</label>
-        <input type="text" placeholder="zno3" name="zno3">
-        <br />
-        <button type="submit">Submit</button>
+    <label>ZNO2:</label>
+    <input type="text" placeholder="zno2" name="TestNeeded2">
+    <br />
+
+    <label>ZNO3:</label>
+    <input type="text" placeholder="zno3" name="TestNeeded3">
+    <br />
+    <button type="submit">Submit</button>
     </form>
-    </div>*@
+</div>
 
-    <div class="create-university">
-        <div class="container">
-            <h1 style="text-align:center">Create Speciality </h1>
-            <form name="my-form" autocomplete="off" action="/Administrator/CreateSpeiality" method="post">
-
-                <div class="form-group" style="text-align:center">
-                    <label for="FacultyName">Faculty name</label>
-                    <select>
-                        @foreach (var item in ViewBag.Faculties)
-                        {
-                            <option>
-                                @item.Name
-                            </option>
-                        }
-                    </select>
-
-                </div>
-
-                <div class="form-group" style="text-align:center">
-                    <label for="SpecialityName">Name of speciality</label>
-                    <input type="text" class="form-control" name="SpecialityName" style="width: 420px;" placeholder="Type full name of speciality " required>
-                </div>
-
-                <div class="form-group" style="text-align:center">
-                    <label for="BudgetPlace">Badget place</label>
-                    <input type="number" class="form-control" name="BudgetPlace" style="width: 420px;" placeholder="Choose or type number of budget place" required>
-                </div>
-                <div class="form-group" style="text-align:center">
-                    <label for="PaidPlace">Paid place</label>
-                    <input type="number" class="form-control" name="PaidPlace" style="width: 420px;" placeholder="Choose or type number of paid place" required>
-                </div>
-
-                <div class="form-group" style="text-align:center">
-                    <label for="zno1">Name of first ZNO</label>
-                    <input type="text" class="form-control" name="zno1" style="width: 420px;" placeholder="Type full name of subject " required>
-                </div>
-
-                <div class="form-group" style="text-align:center">
-                    <label for="zno2">Name of second ZNO</label>
-                    <input type="text" class="form-control" name="zno2" style="width: 420px;" placeholder="Type full name of subject " required>
-                </div>
-
-                <div class="form-group" style="text-align:center">
-                    <label for="zno3">Name of third ZNO</label>
-                    <input type="text" class="form-control" name="zno3" style="width: 420px; " placeholder="Type full name of subject " required>
-                </div>
-
-                <button type="submit" class="btn btn-primary"> Submit</button>
-
-            </form>
-        </div>
-
-        </div>

@@ -10,7 +10,9 @@ namespace Core.Entities
         public string Name { get; set; }
         public int BudgetPlaceNumber { get; set; }
         public int PaidPlaceNumber { get; set; }
-        public string Description { get; set; }        
+        public string Description { get; set; }
+
+        //тут треба поміти тест на велику букву
         public string testNeeded1 { get; set; }
         public string testNeeded2 { get; set; }
         public string testNeeded3 { get; set; }
