@@ -20,7 +20,7 @@ namespace Core.Entities
         public double German { get; set; }
         public User User { get; set; }
 
-       // public string UserId { get; set; }
+       
 
     }
 }
