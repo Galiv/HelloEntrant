@@ -3,6 +3,7 @@ using Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Infrastructure.Repositories
 {
@@ -12,5 +13,10 @@ namespace Infrastructure.Repositories
         {
 
         }
+        public Faculty GetFaculty(string faculty)
+        {
+            return this.db.Faculties.Where(f => f.Name == faculty).FirstOrDefault();
+        }
+
     }
 }
