@@ -44,6 +44,7 @@ namespace HelloEntrantServer.Controllers
         {            
             ViewBag.Faculties = await this.AdministratorService.GetFaculties(
                 await this.AdministratorService.GetUniversityId(User.Identity.Name));
+            
             return View();
         }
 
@@ -55,7 +56,7 @@ namespace HelloEntrantServer.Controllers
 
             ViewBag.Faculties = await this.AdministratorService.GetFaculties(
                 await this.AdministratorService.GetUniversityId(User.Identity.Name));
-
+            _log.LogInformation("Created Speciality");
             return View();
         }
 
