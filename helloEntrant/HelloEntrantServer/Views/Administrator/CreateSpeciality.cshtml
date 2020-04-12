@@ -7,40 +7,50 @@
 
 
 <div>
-    <form action="/Administrator/CreateSpeiality" method="post">
+    <form action="/Administrator/CreateSpeciality" method="post">
         <label>Faculty:</label>
-        <select>@foreach (var item in ViewBag.Faculties)
-        {
-            <option>
-                @item.Name
-            </option>
-        }</select>
-        <br />
+        <select name="FucaltyName">
+            @if (ViewBag.Faculties != null)
+            {
+                @foreach (var item in ViewBag.Faculties)
+                {
+                    <option>
+                        @item.Name
+                    </option>
+                }
+            }
 
-        <label>Name of Speciality:</label>
-        <input type="text" placeholder="Speciality" name="SpecialityName">
-        <br />
+        </select>
+    <br />
 
-        <label>Budget place:</label>
-        <input type="text" placeholder="Budgetplace" name="BudgetPlace">
-        <br />
+    <label>Name of Speciality:</label>
+    <input type="text" placeholder="Speciality" name="SpecialityName">
+    <br />
 
-        <label>Paid place:</label>
-        <input type="text" placeholder="PaidPlace" name="PaidPlace">
-        <br />
+    <label>Description:</label>
+    <input type="text" placeholder="Description" name="Description">
+    <br />
 
-        <label>ZNO1:</label>
-        <input type="text" placeholder="zno1" name="zno1">
-        <br />
+    <label>Budget place:</label>
+    <input type="text" placeholder="Budgetplace" name="BudgetPlaceNumber">
+    <br />
 
-        <label>ZNO2:</label>
-        <input type="text" placeholder="zno2" name="zno2">
-        <br />
+    <label>Paid place:</label>
+    <input type="text" placeholder="PaidPlace" name="PaidPlaceNumber">
+    <br />
 
-        <label>ZNO3:</label>
-        <input type="text" placeholder="zno3" name="zno3">
-        <br />
-        <button type="submit">Submit</button>
+    <label>ZNO1:</label>
+    <input type="text" placeholder="zno1" name="TestNeeded1">
+    <br />
+
+    <label>ZNO2:</label>
+    <input type="text" placeholder="zno2" name="TestNeeded2">
+    <br />
+
+    <label>ZNO3:</label>
+    <input type="text" placeholder="zno3" name="TestNeeded3">
+    <br />
+    <button type="submit">Submit</button>
     </form>
 </div>
 

@@ -10,16 +10,18 @@ namespace Application.DTOs.Administrator
         [Required]
         public string SpecialityName { get; set; }
         [Required]
-        public int budgetPlace { get; set; }
+        public string Description { get; set; }
         [Required]
-        public int paidPlace { get; set; }
+        public int BudgetPlaceNumber { get; set; }
         [Required]
-        public string testNeeded1 { get; set; }
+        public int PaidPlaceNumber { get; set; }
+        [Required]        
+        public string TestNeeded1 { get; set; }
         [Required]
-        public string testNeeded2 { get; set; }
+        public string TestNeeded2 { get; set; }
         [Required]
-        public string testNeeded3 { get; set; }
-        [Required]
+        public string TestNeeded3 { get; set; }
+        
         public string FucaltyName { get; set; }
 
     }

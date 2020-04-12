@@ -7,5 +7,6 @@ namespace Core.Repositories
 {
     public interface ISpecialityRepository: IRepository<Speciality>
     {
+       Faculty GetFaculty(string faculty);
     }
 }

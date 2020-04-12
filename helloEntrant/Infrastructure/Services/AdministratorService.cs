@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Application.DTOs.Administrator;
 
 namespace Infrastructure.Services
 {
@@ -50,9 +51,34 @@ namespace Infrastructure.Services
                                 where u.User.Email == email
                                 select u
                                 ).ToList();
-            return universityId[0].UniversityId;
-                                
+            return universityId[0].UniversityId;                                
         }
+
+
+
+        public async Task CreateSpeciality (CreateSpeciality request)
+        {
+            var faculty = unitOfWork.SpecialityRepository.GetFaculty(request.FucaltyName);
+
+            Speciality speciality = new Speciality
+            {
+                Name = request.SpecialityName,
+                Description = request.Description,
+                BudgetPlaceNumber = request.BudgetPlaceNumber,
+                PaidPlaceNumber = request.PaidPlaceNumber,
+                testNeeded1 = request.TestNeeded1,
+                testNeeded2 = request.TestNeeded2,
+                testNeeded3 = request.TestNeeded3,
+                Faculty = faculty,
+                FacultyId = faculty.FacultyId               
+            };
+
+            await unitOfWork.SpecialityRepository.CreateAsync(speciality);
+            await unitOfWork.Commit();
+
+        }
+
+
 
 
     }
