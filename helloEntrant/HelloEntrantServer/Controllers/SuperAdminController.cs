@@ -6,15 +6,19 @@ using Application.DTOs.SuperAdmin;
 using Application.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace HelloEntrantServer.Controllers
 {
     public class SuperAdminController:Controller
     {
         ISuperAdminService SuperAdminService;
-        public SuperAdminController(ISuperAdminService SuperAdminService)
+        readonly ILogger<AdministratorController> _log;
+
+        public SuperAdminController(ISuperAdminService SuperAdminService, ILogger<AdministratorController> log)
         {
             this.SuperAdminService = SuperAdminService;
+            this._log = log;
         }
         public IActionResult Index()
         {
@@ -34,6 +38,7 @@ namespace HelloEntrantServer.Controllers
             if (request != null)
             {
                 await SuperAdminService.AddNewUniversity(request).ConfigureAwait(true);
+                _log.LogInformation("Created University");
                 return RedirectToAction("ManageUniversities", "SuperAdmin");
             }
 
