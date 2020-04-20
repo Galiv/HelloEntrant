@@ -4,14 +4,16 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HelloEntrantServer.Migrations
 {
     [DbContext(typeof(helloEntrantContex))]
-    partial class helloEntrantContexModelSnapshot : ModelSnapshot
+    [Migration("20200420142218_NewMigration")]
+    partial class NewMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -457,7 +459,7 @@ namespace HelloEntrantServer.Migrations
                     b.HasOne("Core.Entities.User", "User")
                         .WithOne("University")
                         .HasForeignKey("Core.Entities.University", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>

@@ -12,5 +12,7 @@ namespace Application.IServices
         Task AddNewUniversity(AddUniRequest request);
 
         Task<List<University>> GetUniversities();
+
+       Task RemoveUniversity(int UniversityId);
     }
 }

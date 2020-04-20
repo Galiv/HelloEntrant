@@ -66,5 +66,13 @@ namespace Infrastructure.Services
             await unitOfWork.UniversityRepository.CreateAsync(university);
             await unitOfWork.Commit();
         }
+
+        public async Task RemoveUniversity(int UniversityId)
+        {
+            await unitOfWork.UniversityRepository.DeleteAsync(UniversityId);
+            await unitOfWork.Commit();
+        }
+
+
     }
 }
