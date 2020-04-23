@@ -8,6 +8,6 @@ namespace Core.Repositories
 {
     public interface IUniversityRepository: IRepository<University>
     {
-        Task<List<University>> getAllWithUsers();
+        Task<List<University>> getAllWithUsers();        
     }
 }

@@ -22,7 +22,7 @@ namespace Infrastructure.Configurations
             builder.HasOne(f => f.University)
                 .WithMany(f => f.Faculties)
                 .HasForeignKey(f => f.UniversityId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
            // builder.HasOne(u => u.Document);
         }
     }

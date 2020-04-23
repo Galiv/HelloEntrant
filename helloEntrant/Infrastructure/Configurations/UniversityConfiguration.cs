@@ -18,7 +18,7 @@ namespace Infrastructure.Configurations
             builder.HasOne(u => u.User)
                 .WithOne(u => u.University)
                 .HasForeignKey<University>(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

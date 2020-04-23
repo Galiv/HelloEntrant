@@ -30,7 +30,7 @@ namespace Infrastructure.Configurations
             builder.HasOne(s => s.Faculty)
                 .WithMany(s => s.Specialities)
                 .HasForeignKey(s => s.FacultyId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

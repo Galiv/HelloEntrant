@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HelloEntrantServer.Controllers
 {
-    public class SuperAdminController:Controller
+    public class SuperAdminController : Controller
     {
         ISuperAdminService SuperAdminService;
         readonly ILogger<AdministratorController> _log;
@@ -34,7 +34,7 @@ namespace HelloEntrantServer.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateUniversity(AddUniRequest request)
-        {   
+        {
             if (request != null)
             {
                 await SuperAdminService.AddNewUniversity(request).ConfigureAwait(true);
@@ -49,6 +49,20 @@ namespace HelloEntrantServer.Controllers
         {
             var unis = SuperAdminService.GetUniversities();
             return View(unis.Result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveUniversity([FromQuery]int UniversityId)
+        {
+
+
+            if (UniversityId != 0)
+            {
+                await SuperAdminService.RemoveUniversity(UniversityId);
+                _log.LogInformation("University was removed");
+                return RedirectToAction("ManageUniversities", "SuperAdmin");
+            }
+            return RedirectToAction("ManageUniversities", "SuperAdmin");
         }
     }
 }
