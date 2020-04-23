@@ -37,6 +37,7 @@ namespace HelloEntrantServer
             services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserManager, UserOrganizer>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddControllersWithViews();
             services.AddDbContext<helloEntrantContex>(options =>

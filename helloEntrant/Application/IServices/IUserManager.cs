@@ -12,6 +12,8 @@ namespace Application.IServices
         Task<IdentityResult> CreateAsync(User user, string password);
         Task<IdentityResult> AddToRoleAsync(User user, string role);
 
+      
+
     }
 
 }
