@@ -51,12 +51,14 @@ namespace HelloEntrantServer.Controllers
             return View(unis.Result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> RemoveUniversity(int UniversityId)
+        [HttpGet]
+        public async Task<IActionResult> RemoveUniversity([FromQuery]int UniversityId)
         {
+
+
             if (UniversityId != 0)
             {
-                await SuperAdminService.RemoveUniversity(UniversityId).ConfigureAwait(true); ;
+                await SuperAdminService.RemoveUniversity(UniversityId);
                 _log.LogInformation("University was removed");
                 return RedirectToAction("ManageUniversities", "SuperAdmin");
             }

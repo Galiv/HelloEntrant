@@ -33,7 +33,7 @@ namespace Infrastructure.Services
                         join user in await unitOfWork.UserRepository.GetAllAsync()
                         on uni.UserId equals user.Id
                         select new University()
-                        {Name = uni.Name, User = user}).ToList();
+                        {Name = uni.Name, User = user, UniversityId = uni.UniversityId}).ToList();
 
             return unis;
         }
