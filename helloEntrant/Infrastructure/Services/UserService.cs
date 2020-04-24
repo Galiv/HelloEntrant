@@ -22,6 +22,11 @@ namespace Infrastructure.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public Task AddTests(UserProfile request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<UserProfile> GetUserInfo(string email)
         {
             var user = await unitOfWork.UserRepository.GetUser(email);
