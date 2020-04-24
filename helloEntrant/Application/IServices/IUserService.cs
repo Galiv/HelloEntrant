@@ -12,6 +12,6 @@ namespace Application.IServices
 
         Task<UserProfile> GetUserInfo(string email);
 
-        Task AddTests(UserProfile request);
+        //Task AddTests(UserProfile request);
     }
 }

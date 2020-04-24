@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using Application.DTOs.Administrator;
+using Core;
 using Core.Entities;
 using Core.Repositories;
 using Infrastructure.Repositories;
@@ -22,44 +23,37 @@ namespace ApplicationTest.AdministratorTests
 
             var faculty = new Faculty
             {
-                Name = "Math",
-                FacultyId = 1
+                Name = "Math",                
             };
 
-            var speciality = new Speciality
+         
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+
+            var specialityRepository = new Mock<ISpecialityRepository>();
+            mockUnitOfWork.Setup(x => x.SpecialityRepository).Returns(specialityRepository.Object);
+            specialityRepository.Setup(x => x.GetFaculty(It.IsAny<string>())).Returns(faculty);            
+
+            var administratorService = new AdministratorService(mockUnitOfWork.Object);
+            var createSpeciality = new CreateSpeciality()
             {
-                Name = "la",
+                SpecialityName = "la",
                 Description = "la",
                 BudgetPlaceNumber = 100,
                 PaidPlaceNumber = 100,
-                testNeeded1 = "Math",
-                testNeeded2 = "English",
-                testNeeded3 = "English",
-                Faculty = faculty,
-                FacultyId = faculty.FacultyId
+                TestNeeded1 = "Math",
+                TestNeeded2 = "English",
+                TestNeeded3 = "German",
+                FucaltyName = "Math"
             };
 
+            //Act
+            await administratorService.CreateSpeciality(createSpeciality);
+
+            //assert
+            mockUnitOfWork.Verify(x => x.SpecialityRepository.CreateAsync(It.IsAny<Speciality>()), Times.Once);
             
 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var specialityRepository = new Mock<ISpecialityRepository>();
 
-
-            specialityRepository.Setup(x => x.GetFaculty(It.IsAny<string>())).Returns(faculty);
-
-            //var facultyRepository = new Mock<IFacultyRepository>();
-
-            //userRepository.Setup(x => x.getUserWithUniversity(It.IsAny<string>())).ReturnsAsync(user);
-            //mockUnitOfWork.Setup(x => x.UserRepository).Returns(userRepository.Object);
-            //mockUnitOfWork.Setup(x => x.FacultyRepository).Returns(facultyRepository.Object);
-            //var createFaculty = new Mock<CreateFaculty>();
-            //var administratorService = new AdministratorService(mockUnitOfWork.Object);
-
-
-            ////Act
-            //await administratorService.CreateFaculty(faculty);
-            ////assert
-            //mockUnitOfWork.Verify(x => x.FacultyRepository.CreateAsync(It.IsAny<Faculty>()), Times.Once);
 
 
 
