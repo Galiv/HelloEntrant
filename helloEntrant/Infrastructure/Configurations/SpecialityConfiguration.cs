@@ -15,8 +15,8 @@ namespace Infrastructure.Configurations
             builder.HasKey(s => s.SpecialityId);
             builder.Property(s => s.Name)
                 .IsRequired();                
-            builder.Property(s => s.Description)
-                .IsRequired();
+            //builder.Property(s => s.Description)
+            //    .IsRequired();
             builder.Property(s => s.PaidPlaceNumber)
                   .IsRequired();
             builder.Property(s => s.BudgetPlaceNumber)

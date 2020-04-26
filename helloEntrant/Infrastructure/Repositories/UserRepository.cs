@@ -19,5 +19,10 @@ namespace Infrastructure.Repositories
         {
             return db.Users.Where(u => u.Id == userId).Include(u => u.University).FirstOrDefaultAsync();
         }
+
+        public Task<User> GetUser (string email)
+        {
+            return db.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+        }
     }
 }

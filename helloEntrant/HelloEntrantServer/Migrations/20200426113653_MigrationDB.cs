@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HelloEntrantServer.Migrations
 {
-    public partial class initDB3 : Migration
+    public partial class MigrationDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -241,7 +241,8 @@ namespace HelloEntrantServer.Migrations
                         name: "FK_Universities_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -261,7 +262,8 @@ namespace HelloEntrantServer.Migrations
                         name: "FK_Faculties_Universities_UniversityId",
                         column: x => x.UniversityId,
                         principalTable: "Universities",
-                        principalColumn: "UniversityId");
+                        principalColumn: "UniversityId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,7 +275,7 @@ namespace HelloEntrantServer.Migrations
                     Name = table.Column<string>(nullable: false),
                     BudgetPlaceNumber = table.Column<int>(nullable: false),
                     PaidPlaceNumber = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     testNeeded1 = table.Column<string>(nullable: false),
                     testNeeded2 = table.Column<string>(nullable: false),
                     testNeeded3 = table.Column<string>(nullable: false),
@@ -286,7 +288,8 @@ namespace HelloEntrantServer.Migrations
                         name: "FK_Specialities_Faculties_FacultyId",
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
-                        principalColumn: "FacultyId");
+                        principalColumn: "FacultyId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
