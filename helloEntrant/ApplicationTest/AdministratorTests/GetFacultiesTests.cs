@@ -18,6 +18,8 @@ namespace ApplicationTest.AdministratorTests
 
         public async void GetFaculties_ShouldReturnValidValues()
         {
+
+            //Arrange
             List<Faculty> faculties = new List<Faculty>
             {
                 new Faculty{Name = "Fac1", UniversityId = 1},

@@ -13,7 +13,6 @@ namespace Infrastructure.Services
     public class UserService: IUserService
     {
         UserManager<User> userManager;
-
         private IUnitOfWork unitOfWork;
 
         public UserService(UserManager<User> userManager, IUnitOfWork unitOfWork)
@@ -37,8 +36,7 @@ namespace Infrastructure.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 City = user.City,
-                DateOfBirth = user.DateOfBirth
-               
+                DateOfBirth = user.DateOfBirth               
             };
 
             return userProfile;
