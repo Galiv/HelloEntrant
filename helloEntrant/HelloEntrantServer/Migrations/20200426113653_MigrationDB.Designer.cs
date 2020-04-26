@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloEntrantServer.Migrations
 {
     [DbContext(typeof(helloEntrantContex))]
-    [Migration("20200406193651_initDB3")]
-    partial class initDB3
+    [Migration("20200426113653_MigrationDB")]
+    partial class MigrationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,7 +97,6 @@ namespace HelloEntrantServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FacultyId")
@@ -441,7 +440,7 @@ namespace HelloEntrantServer.Migrations
                     b.HasOne("Core.Entities.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -450,7 +449,7 @@ namespace HelloEntrantServer.Migrations
                     b.HasOne("Core.Entities.Faculty", "Faculty")
                         .WithMany("Specialities")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -459,7 +458,7 @@ namespace HelloEntrantServer.Migrations
                     b.HasOne("Core.Entities.User", "User")
                         .WithOne("University")
                         .HasForeignKey("Core.Entities.University", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
