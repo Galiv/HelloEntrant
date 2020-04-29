@@ -7,29 +7,48 @@
     <thead>
         <tr>
             <th scope="col" style="text-align:center">University</th>
-            <th scope="col" style="text-align:center">Admin</th>
-            <th scope="col" style="text-align:center"></th>
+            @if (User.IsInRole("SuperAdmin"))
+            {
+                <th scope="col" style="text-align:center">Admin</th>
+                <th scope="col" style="text-align:center"></th>
+            }
+            else
+            {
+                <th scope="col" style="text-align:center">City</th>
+            }
         </tr>
     </thead>
     @foreach (var university in Model)
     {
-        <tr style="text-align:center">
-            <td>
-                <h3>
-                    @university.Name
-                </h3>
-            </td>
-            <td>
-                <h3>
-                    @university.User.Email
-                </h3>
-            </td>
-            <td>
-                <a class="btn btn-outline-primary waves-effect btn-sm" href="/SuperAdmin/RemoveUniversity?UniversityId=@university.UniversityId">
-                    <i class="far mr-2" aria-hidden="true"></i>
-                    Remove
-                </a>
-            </td>
-        </tr>
+<tr style="text-align:center" onclick="window.location = '@Url.Action("GetUniversity", "Administrator", new {id = university.UniversityId})'">
+    <td>
+        <h3>
+            @university.Name
+        </h3>
+    </td>
+    @if (User.IsInRole("SuperAdmin"))
+    {
+        <td>
+            <h3>
+                @university.User.Email
+            </h3>
+        </td>
+        <td>
+            <a class="btn btn-outline-primary waves-effect btn-sm" href="/SuperAdmin/RemoveUniversity?UniversityId=@university.UniversityId">
+                <i class="far mr-2" aria-hidden="true"></i>
+                Remove
+            </a>
+        </td>
+    }
+    else
+    {
+        <td>
+            <h3>
+                @university.City
+            </h3>
+        </td>
+    }
+
+</tr>
     }
 </table>

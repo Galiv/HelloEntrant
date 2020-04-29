@@ -21,6 +21,10 @@
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav flex-grow-1">
 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SuperAdmin" asp-action="ManageUniversities">View Universities</a>
+                        </li>
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             if (User.IsInRole("Administrator"))
@@ -38,9 +42,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="SuperAdmin" asp-action="CreateUniversity">Create University</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="SuperAdmin" asp-action="ManageUniversities">Manage Universities</a>
-                                </li>
+                               
                             }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="PersonalCabinet">Personal Cabinet</a>
