@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -18,5 +20,9 @@ namespace Infrastructure.Repositories
             return this.db.Faculties.Where(f => f.Name == faculty).FirstOrDefault();
         }
 
+        public Task<List<Speciality>> GetAllSpecialitiesWithFacultyId(int facultyId)
+        {
+            return this.db.Specialities.Where(f => f.FacultyId == facultyId).ToListAsync();
+        }
     }
 }

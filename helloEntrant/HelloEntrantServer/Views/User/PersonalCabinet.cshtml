@@ -3,12 +3,6 @@
     ViewData["Title"] = "PersonalCabinet";
 }
 
-
-
-
-
-
-
 <div class="create-university">
     <div class="container">
         <h1>Personal Cabinet </h1>
@@ -45,122 +39,125 @@
         </form>
 
         <br />
-        
-        <form name="my-form" autocomplete="off" action="/User/AddTests" method="post">
-            
-                    <div class="form-group">
-                        <label for="ZnoModels">First ZNO</label>
-                        @*<select required="" asp-for="testHelper1.Name">*@
-                        @*<option disabled selected="selected">Ukrainian</option>*@
-                        <select required="" asp-for="testHelper1.Name" onchange="doSomething(this)">
-                            <option disabled selected="selected">-- select zno --</option>
-
-                            <option name="1">Math</option>
-                            <option name="2">Geography</option>
-                            <option name="3">History</option>
-                            <option name="4">English</option>
-                            <option name="5">Spanish</option>
-                            <option name="6">French</option>
-                            <option name="7">German</option>
-                            <option name="8">Biology</option>
-                            <option name="9">Physics</option>
-                            <option name="10">Chemistry</option>
-                            <option name="11">Ukrainian</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-                        <input asp-for="testHelper1.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
-                    </div>
-
-                    <br />
-
-                    <div class="form-group">
-                        <label for="ZnoModels">Second ZNO</label>
-                        <select required="" asp-for="testHelper2.Name" onchange="doSomething(this)">
-                            <option disabled selected="selected">-- select zno --</option>
-
-                            <option name="1">Math</option>
-                            <option name="2">Geography</option>
-                            <option name="3">History</option>
-                            <option name="4">English</option>
-                            <option name="5">Spanish</option>
-                            <option name="6">French</option>
-                            <option name="7">German</option>
-                            <option name="8">Biology</option>
-                            <option name="9">Physics</option>
-                            <option name="10">Chemistry</option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <input asp-for="testHelper2.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
-                    </div>
-
-                    <br />
 
 
-                    <div class="form-group">
-                        <label for="ZnoModels">Third ZNO</label>
-                        <select required="" asp-for="testHelper3.Name" onchange="doSomething(this)">
-                            <option disabled selected="selected">-- select zno --</option>
+        @if (!User.IsInRole("Administrator") && !User.IsInRole("SuperAdmin"))
+        {
+            <form name="my-form" autocomplete="off" action="/User/AddTests" method="post">
 
-                            <option name="1">Math</option>
-                            <option name="2">Geography</option>
-                            <option name="3">History</option>
-                            <option name="4">English</option>
-                            <option name="5">Spanish</option>
-                            <option name="6">French</option>
-                            <option name="7">German</option>
-                            <option name="8">Biology</option>
-                            <option name="9">Physics</option>
-                            <option name="10">Chemistry</option>
+                <div class="form-group">
+                    <label for="ZnoModels">First ZNO</label>
+                    @*<select required="" asp-for="testHelper1.Name">*@
+                    @*<option disabled selected="selected">Ukrainian</option>*@
+                    <select required="" asp-for="testHelper1.Name" onchange="doSomething(this)">
+                        <option disabled selected="selected">-- select zno --</option>
 
-                        </select>
-                    </div>
+                        <option name="1">Ukrainian</option>
+                        @*<option name="2">Geography</option>
+                        <option name="3">History</option>
+                        <option name="4">English</option>
+                        <option name="5">Spanish</option>
+                        <option name="6">French</option>
+                        <option name="7">German</option>
+                        <option name="8">Biology</option>
+                        <option name="9">Physics</option>
+                        <option name="10">Chemistry</option>
+                        <option name="11">Ukrainian</option>*@
 
-                    <div class="form-group">
-                        <input asp-for="testHelper3.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
-                    </div>
+                    </select>
 
-                    <br />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="testHelper1.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <label for="ZnoModels">Second ZNO</label>
+                    <select required="" asp-for="testHelper2.Name" onchange="doSomething(this)">
+                        <option disabled selected="selected">-- select zno --</option>
+
+                        <option name="1">Math</option>
+                        <option name="2">Geography</option>
+                        <option name="3">History</option>
+                        <option name="4">English</option>
+                        <option name="5">Spanish</option>
+                        <option name="6">French</option>
+                        <option name="7">German</option>
+                        <option name="8">Biology</option>
+                        <option name="9">Physics</option>
+                        <option name="10">Chemistry</option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="testHelper2.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
+                </div>
+
+                <br />
+
+
+                <div class="form-group">
+                    <label for="ZnoModels">Third ZNO</label>
+                    <select required="" asp-for="testHelper3.Name" onchange="doSomething(this)">
+                        <option disabled selected="selected">-- select zno --</option>
+
+                        <option name="1">Math</option>
+                        <option name="2">Geography</option>
+                        <option name="3">History</option>
+                        <option name="4">English</option>
+                        <option name="5">Spanish</option>
+                        <option name="6">French</option>
+                        <option name="7">German</option>
+                        <option name="8">Biology</option>
+                        <option name="9">Physics</option>
+                        <option name="10">Chemistry</option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="testHelper3.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
+                </div>
+
+                <br />
 
 
 
-                    <div class="form-group">
-                        <label for="ZnoModels">Four ZNO</label>
-                        <select required="" asp-for="testHelper4.Name" onchange="doSomething(this)">
-                            <option disabled selected="selected">-- select zno --</option>
+                <div class="form-group">
+                    <label for="ZnoModels">Four ZNO</label>
+                    <select required="" asp-for="testHelper4.Name" onchange="doSomething(this)">
+                        <option disabled selected="selected">-- select zno --</option>
 
-                            <option name="1">Math</option>
-                            <option name="2">Geography</option>
-                            <option name="3">History</option>
-                            <option name="4">English</option>
-                            <option name="5">Spanish</option>
-                            <option name="6">French</option>
-                            <option name="7">German</option>
-                            <option name="8">Biology</option>
-                            <option name="9">Physics</option>
-                            <option name="10">Chemistry</option>
-                            <option name="11" selected> None</option>
-                        </select>
-                    </div>
+                        <option name="1">Math</option>
+                        <option name="2">Geography</option>
+                        <option name="3">History</option>
+                        <option name="4">English</option>
+                        <option name="5">Spanish</option>
+                        <option name="6">French</option>
+                        <option name="7">German</option>
+                        <option name="8">Biology</option>
+                        <option name="9">Physics</option>
+                        <option name="10">Chemistry</option>
+                        <option name="11" selected> None</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
+                <div class="form-group">
 
-                        <input asp-for="testHelper4.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
-                    </div>
+                    <input asp-for="testHelper4.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
+                </div>
 
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
 
-            
+
 
             </form>
-
+        
 
             <br />
 
@@ -188,9 +185,9 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
 
             </form>
-       
+            }
 
-    </div>
+        </div>
 
-            </div>
+</div>
    

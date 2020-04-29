@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Core.Entities;
 using Core;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace Infrastructure.Services
 {
@@ -15,11 +17,13 @@ namespace Infrastructure.Services
     {
         UserManager<User> userManager;
         private IUnitOfWork unitOfWork;
+        private readonly IHttpContextAccessor httpContext;
 
-        public UserService(UserManager<User> userManager, IUnitOfWork unitOfWork)
+        public UserService(UserManager<User> userManager, IUnitOfWork unitOfWork, IHttpContextAccessor httpContext)
         {
             this.userManager = userManager;
             this.unitOfWork = unitOfWork;
+            this.httpContext = httpContext;
         }
 
         public Task AddTests(UserProfile request)
@@ -103,17 +107,51 @@ namespace Infrastructure.Services
             
         }
 
-        //public async Task AddTests(UserProfile request)
-        //{
-        //    var user = await userManager.FindByEmailAsync(request.Email);
+        public async Task<bool> ApplyButtonExecuteAsync(int specialityId)
+        {
+            var userName = httpContext.HttpContext.User.Identity.Name;
+            var user = await userManager.FindByNameAsync(userName);
+            var speciality = await unitOfWork.SpecialityRepository.GetAsync(specialityId);
 
-        //    if (user != null)
-        //    {
-                
+            if (user == null || speciality == null)
+            {
+                return false;
+            }
 
-        //        await userManager.UpdateAsync(user);
-        //    }
+            var allUsersApplications = unitOfWork.ApplicationRepository.GetAllApplicationsByUserId(user.Id).Result;
+            if (allUsersApplications.Any(app => app.SpecialityId == specialityId))
+            {
+                return false; //"You have already applied";
+            }
 
-        //}
+            if (user.TestId == null)
+            {
+                return false; // "Please, set you marks.";
+            }
+
+            var usersZno = await unitOfWork.TestRepository.GetAsync(user.TestId.Value);
+            var userZNOs = usersZno.GetNotNullMarks();
+            var requiredZNO = speciality.GetRequiredTest();
+
+            var isAllRequiredPresent = requiredZNO.All(x => userZNOs.Any(y => x == y));
+
+            if (!isAllRequiredPresent)
+            {
+                return false;// "Sorry, but you do not have required zno.";
+            }
+
+            var application = new Core.Entities.Application()
+            {
+                UserId = user.Id,
+                SpecialityId = speciality.SpecialityId
+            };
+
+            await userManager.UpdateAsync(user);
+            await unitOfWork.ApplicationRepository.CreateAsync(application);
+            await unitOfWork.Commit();
+
+
+            return true;
+        }        
     }
 }

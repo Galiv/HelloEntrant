@@ -14,7 +14,7 @@ namespace Application.IServices
         Task<List<Faculty>> GetFaculties(int UniversityId);
         Task<int> GetUniversityId(string UserId);
         Task CreateSpeciality(CreateSpeciality request);
-
-        //public Faculty GetFaculty(string faculty);
+        Task<CurrentUniversityAndFacultiesModel> GetUniversityAsync(int universityId);
+        Task<CurrentFacultyAndSpecialitiesModel> GetFacultyAsync(int facultyId);
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HelloEntrantServer.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class AdministratorController : Controller
     {
         public IAdministratorService AdministratorService { get; }
@@ -24,7 +24,7 @@ namespace HelloEntrantServer.Controllers
         {
             this.AdministratorService = AdministratorService;
             this._log = log;
-        }       
+        }
 
         public IActionResult CreateFaculty()
         {
@@ -41,7 +41,7 @@ namespace HelloEntrantServer.Controllers
             return View();
         }
         public async Task<IActionResult> CreateSpeciality()
-        {            
+        {
             ViewBag.Faculties = await this.AdministratorService.GetFaculties(
                 await this.AdministratorService.GetUniversityId(User.Identity.Name));
 
@@ -51,7 +51,7 @@ namespace HelloEntrantServer.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateSpeciality(CreateSpeciality speciality)
-        { 
+        {
 
             await AdministratorService.CreateSpeciality(speciality);
 
@@ -61,6 +61,39 @@ namespace HelloEntrantServer.Controllers
             return View();
         }
 
+        public async Task<ActionResult> GetUniversity(int id)
+        {
+            var universityAndFaculties = await this.AdministratorService.GetUniversityAsync(id).ConfigureAwait(true);
+            if (universityAndFaculties == null) return RedirectToAction();
 
+            ViewBag.iseditable = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+
+                //ViewBag.iseditable = userId == universityAndFaculties.CurrentUniversity.UserId;
+            }
+
+            _log.LogInformation("Show university");
+            return View("University", universityAndFaculties);
+        }
+        public async Task<ActionResult> GetFaculty(int id, string message = null)
+        {
+            var facultyAndSpecialities = await this.AdministratorService.GetFacultyAsync(id).ConfigureAwait(true); ;
+            if (facultyAndSpecialities == null) return RedirectToAction();
+
+            ViewBag.iseditable = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+
+                //ViewBag.iseditable = userId == facultyAndSpecialities.FacultyAdminId;
+            }
+
+
+            return View("Faculty", facultyAndSpecialities);
+        }
     }
 }

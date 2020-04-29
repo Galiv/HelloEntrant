@@ -19,5 +19,9 @@ namespace Infrastructure.Repositories
             return this.db.Universities.Include(u => u.User).ToListAsync();
         }
 
+        public Task<University> GetUniversityWithId(int universityId)
+        {
+            return this.db.Universities.FirstOrDefaultAsync(uni => uni.UniversityId == universityId);
+        }
     }
 }
