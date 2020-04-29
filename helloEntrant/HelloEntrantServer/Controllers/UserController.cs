@@ -16,10 +16,13 @@ namespace HelloEntrantServer.Controllers
 
 
         public IUserService userService { get; }
+        public ITestService testService { get; }
 
-        public UserController (IUserService userService)
+
+        public UserController (IUserService userService, ITestService testService)
         {
             this.userService = userService;
+            this.testService = testService;
         }
 
         [Authorize]
@@ -48,6 +51,7 @@ namespace HelloEntrantServer.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTests(UserProfile request)
         {
+            await testService.SaveTests(request, User.Identity.Name);
 
             return RedirectToAction("PersonalCabinet", "User");
         }

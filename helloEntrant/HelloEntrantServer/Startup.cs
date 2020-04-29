@@ -38,6 +38,7 @@ namespace HelloEntrantServer
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserManager, UserOrganizer>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITestService, TestService>();
 
             services.AddControllersWithViews();
             services.AddDbContext<helloEntrantContex>(options =>
