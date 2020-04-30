@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -94,7 +94,9 @@ namespace HelloEntrantServer
             app.UseAuthentication();
             app.UseAuthorization();
 
+
             //DataInitializer.SeedData(userManager, roleManager, contex).Wait();
+
 
             app.UseEndpoints(endpoints =>
             {
