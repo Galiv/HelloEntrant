@@ -117,6 +117,8 @@ namespace Infrastructure.Services
                 currentFacultyAndSpecialities.FacultyAdminId = university.UserId;
 
                 return currentFacultyAndSpecialities;
+                //hi
+
             }
 
             return null;
