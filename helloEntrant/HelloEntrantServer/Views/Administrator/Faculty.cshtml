@@ -1,0 +1,135 @@
+﻿@using Application.DTOs.Administrator
+@model Application.DTOs.Administrator.CurrentFacultyAndSpecialitiesModel;
+@{
+    ViewData["Title"] = "University";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-7">
+            @if (Model.Specialities != null)
+            {
+                <table class="content-table table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="text-align: center">Speciality</th>
+                            <th scope="col" style="text-align: center">Free Spaces</th>
+                            <th scope="col" style="text-align: center">Paid Spaces</th>
+                            <th scope="col" style="text-align: center">Required ZNO</th>
+                            @if (User.IsInRole("User"))
+                            {
+                                <th scope="col" style="text-align: center; width: 10%;"></th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var speciality in Model.Specialities)
+                        {
+                        <tr style="text-align: center">
+                            <td>
+                                <h5>
+                                    @speciality.Name
+                                </h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    @speciality.BudgetPlaceNumber
+                                </h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    @speciality.PaidPlaceNumber
+                                </h5>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>@speciality.testNeeded1</tr>
+                                    <br>
+                                    @if (!string.IsNullOrWhiteSpace(speciality.testNeeded2))
+                                    {
+                                        <tr>@speciality.testNeeded2</tr>
+                                        <br>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(speciality.testNeeded3))
+                                    {
+                                        <tr>@speciality.testNeeded3</tr>
+                                    }
+                                </table>
+                            </td>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @if (!User.IsInRole("Administrator") && !User.IsInRole("SuperAdmin"))
+                                {
+                                    <td>
+                                        <button onclick="window.location.href = '@Url.Action("ApplyButtonExecute", "User",
+                                         new { specialityId = speciality.SpecialityId, facultyId = speciality.FacultyId })';return false">
+                                            Apply
+                                        </button>
+
+                                    </td>
+                                }
+                            }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h1>There are no specialities yet</h1>
+            }
+
+        </div>
+        @*<div class="col-3 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row m-0 p-0 rowedit">
+                        @if (User.IsInRole("UniversityAdmin") && ViewBag.iseditable)
+                        {
+                            <div class="col-1 m-0 p-0">
+                                @await Html.PartialAsync("/Views/PopUpWindows/EditFacultyPopUp.cshtml", Model.CurrentFaculty)
+                            </div>
+                        }
+                    </div>
+
+                    <p class="h4 text-center py-4">Faculty Info</p>
+
+                    <label for="" class="grey-text font-weight-light">Name</label>
+                    <input type="text" id="" class="form-control" value="@Model.CurrentFaculty.Name" readonly>
+
+                    <label for="" class="grey-text font-weight-light">Address</label>
+                    <input type="text" id="" class="form-control" value="@Model.CurrentFaculty.Address" readonly>
+
+                    <label for="" class="grey-text font-weight-light">Description</label>
+                    <textarea type="text" id="" class="form-control" style="resize: none" readonly>@Model.CurrentFaculty.Description</textarea>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        var $chosen = $('.chosen-select').chosen({
+            max_selected_options: 4
+        });
+
+        var selector = document.getElementById("znoSelector_chosen");
+        selector.style.width = "100%";
+
+        $chosen.change(function() {
+            var $this = $(this);
+            var chosen = $this.data('chosen');
+            var search = chosen.search_container.find('input[type="text"]');
+            search.prop('disabled', $this.val() !== null);
+            if (chosen.active_field) {
+                search.focus();
+            }
+        });
+    </script>
+}

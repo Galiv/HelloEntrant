@@ -2,7 +2,10 @@
 using Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -12,5 +15,11 @@ namespace Infrastructure.Repositories
         {
 
         }
+        public Task<List<Faculty>> GetAllFacultiesWithUniversityId(int universityId)
+        {
+            return this.db.Faculties
+                .Where(f => f.UniversityId == universityId).ToListAsync();
+        }
     }
+
 }

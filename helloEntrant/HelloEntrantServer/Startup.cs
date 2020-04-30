@@ -38,6 +38,7 @@ namespace HelloEntrantServer
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserManager, UserOrganizer>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITestService, TestService>();
 
             services.AddControllersWithViews();
             services.AddDbContext<helloEntrantContex>(options =>
@@ -93,7 +94,9 @@ namespace HelloEntrantServer
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //aInitializer.SeedData(userManager, roleManager, contex).Wait();
+
+            //DataInitializer.SeedData(userManager, roleManager, contex).Wait();
+
 
             app.UseEndpoints(endpoints =>
             {

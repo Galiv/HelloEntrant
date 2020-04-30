@@ -18,5 +18,18 @@ namespace Core.Entities
         public string testNeeded3 { get; set; }
         public int FacultyId { get; set; }
         public Faculty Faculty { get; set; }
+
+        public List<string> GetRequiredTest()
+        {
+            var requiredTest = new List<string>
+            {
+                testNeeded1,
+                testNeeded2
+            };
+
+            if (!string.IsNullOrWhiteSpace(testNeeded3)) requiredTest.Add(testNeeded3);
+
+            return requiredTest;
+        }
     }
 }

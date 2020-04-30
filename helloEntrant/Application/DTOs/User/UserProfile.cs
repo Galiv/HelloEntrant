@@ -12,14 +12,20 @@ namespace Application.DTOs.User
         public string City { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public List<TestHelper> testHelpers = new List<TestHelper>()
-        {
-            new TestHelper(),
-            new TestHelper(),
-            new TestHelper(),
-            new TestHelper()
-        };
-}
+        public TestHelper testHelper1 { get; set; }
+
+        public TestHelper testHelper2 { get; set; }
+        public TestHelper testHelper3 { get; set; }
+        public TestHelper testHelper4 { get; set; }
+
+        //public List<TestHelper> testHelpers = new List<TestHelper>()
+        //{
+        //    new TestHelper(),
+        //    new TestHelper(),
+        //    new TestHelper(),
+        //    new TestHelper()
+        //};
+    }
     public class TestHelper
     {
         public string Name { get; set; }

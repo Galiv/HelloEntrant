@@ -78,7 +78,51 @@ namespace Infrastructure.Services
 
         }
 
+        public async Task<CurrentUniversityAndFacultiesModel> GetUniversityAsync(int universityId)
+        {
+            var university = await unitOfWork.UniversityRepository.GetAsync(universityId);
 
+            var currentUniAndFaculties = new CurrentUniversityAndFacultiesModel();
+
+            if (university != null)
+            {
+                currentUniAndFaculties.CurrentUniversity = university;
+
+                var faculties = unitOfWork.FacultyRepository.GetAllFacultiesWithUniversityId(universityId).Result;
+
+                currentUniAndFaculties.Faculties = faculties;
+
+                return currentUniAndFaculties;
+            }
+
+            return null;
+        }
+
+        public async Task<CurrentFacultyAndSpecialitiesModel> GetFacultyAsync(int facultyId)
+        {
+            var faculty = await unitOfWork.FacultyRepository.GetAsync(facultyId);
+
+            var currentFacultyAndSpecialities = new CurrentFacultyAndSpecialitiesModel();
+
+            if (faculty != null)
+            {
+                currentFacultyAndSpecialities.CurrentFaculty = faculty;
+
+                var specialities = unitOfWork.SpecialityRepository.GetAllSpecialitiesWithFacultyId(facultyId).Result;
+
+                currentFacultyAndSpecialities.Specialities = specialities;
+
+                var university = await unitOfWork.UniversityRepository.GetUniversityWithId(faculty.UniversityId);
+
+                currentFacultyAndSpecialities.FacultyAdminId = university.UserId;
+
+                return currentFacultyAndSpecialities;
+                //hi
+
+            }
+
+            return null;
+        }
 
 
     }
