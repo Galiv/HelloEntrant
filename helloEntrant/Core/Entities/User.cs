@@ -16,6 +16,7 @@ namespace Core.Entities
         public int? TestId { get; set; }
         public Test Test { get; set; }       
         public ICollection<Document> Documents { get; set; } = new List<Document>();
+        public ICollection<Application> Applications { get; set; } = new List<Application>();
         public University University { get; set; }
     }
 }

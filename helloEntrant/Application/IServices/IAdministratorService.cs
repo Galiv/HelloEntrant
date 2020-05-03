@@ -16,5 +16,6 @@ namespace Application.IServices
         Task CreateSpeciality(CreateSpeciality request);
         Task<CurrentUniversityAndFacultiesModel> GetUniversityAsync(int universityId);
         Task<CurrentFacultyAndSpecialitiesModel> GetFacultyAsync(int facultyId);
+        Task<List<UserRating>> GetRatingAsync(int specialityId);
     }
 }

@@ -78,5 +78,26 @@ namespace Core.Entities
             return notNullSubjects;
         }
 
+        public double GetAverageMarks()
+        {
+            double sum = 0;
+            if (Math != 0) sum += Math;
+            if (Geography != 0) sum += Geography;
+            if (Ukrainian != 0) sum += Ukrainian;
+            if (History != 0) sum += History;
+            if (English != 0) sum += English;
+            if (Spanish != 0) sum += Spanish;
+            if (French != 0) sum += French;
+            if (German != 0) sum += German;
+            if (Biology != 0) sum += Biology;
+            if (Physics != 0) sum += Physics;
+            if (Chemistry != 0) sum += Chemistry;
+
+            int count = GetNotNullMarks().Count;
+
+            return sum / count;
+        }
+
+
     }
 }

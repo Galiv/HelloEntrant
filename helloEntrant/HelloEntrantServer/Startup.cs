@@ -95,7 +95,7 @@ namespace HelloEntrantServer
             app.UseAuthorization();
 
 
-            //DataInitializer.SeedData(userManager, roleManager, contex).Wait();
+            DataInitializer.SeedData(userManager, roleManager, contex).Wait();
 
 
             app.UseEndpoints(endpoints =>

@@ -116,12 +116,25 @@ namespace Infrastructure.Services
 
                 currentFacultyAndSpecialities.FacultyAdminId = university.UserId;
 
-                return currentFacultyAndSpecialities;
-                //hi
+                return currentFacultyAndSpecialities;              
 
             }
 
             return null;
+        }
+
+        public async Task<List<UserRating>> GetRatingAsync(int specialityId)
+        {
+            var applications = await unitOfWork.ApplicationRepository.GetAllApplicationsOfSpeciality(specialityId);
+
+            var userRatings = (from a in applications
+                               select new UserRating()
+                               {
+                                   FirstName = a.User.FirstName,
+                                   LastName = a.User.LastName,
+                                   AverageMark = a.User.Test.GetAverageMarks()
+                               }).OrderByDescending(a => a.AverageMark).ToList();
+            return userRatings;
         }
 
 

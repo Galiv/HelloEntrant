@@ -9,5 +9,6 @@ namespace Core.Entities
         public int ApplicationId { get; set; }
         public string UserId { get; set; }
         public int SpecialityId { get; set; }
+        public User User { get; set; }
     }
 }
