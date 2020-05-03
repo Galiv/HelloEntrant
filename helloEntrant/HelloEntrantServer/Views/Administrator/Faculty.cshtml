@@ -28,7 +28,7 @@
                     <tbody>
                         @foreach (var speciality in Model.Specialities)
                         {
-                        <tr style="text-align: center">
+                        <tr style="text-align: center" onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
                             <td>
                                 <h5>
                                     @speciality.Name

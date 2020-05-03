@@ -88,12 +88,17 @@ namespace HelloEntrantServer.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
-
-                //ViewBag.iseditable = userId == facultyAndSpecialities.FacultyAdminId;
+                                
             }
 
-
             return View("Faculty", facultyAndSpecialities);
+        }
+
+        public async Task<ActionResult> GetRating (int specialityId)
+        {
+            var ratings = await this.AdministratorService.GetRatingAsync(specialityId);
+
+            return View(ratings);
         }
     }
 }
