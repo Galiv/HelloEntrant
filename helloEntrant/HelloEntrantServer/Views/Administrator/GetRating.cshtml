@@ -3,7 +3,7 @@
     ViewData["Title"] = "GetRating";
 }
 
-<h1>GetRating</h1>
+<h1 style="text-align:center">Rating</h1>
 
 <table class="content-table table table-hover">
     <thead>
@@ -14,24 +14,24 @@
         </tr>
     </thead>
     @foreach (var application in Model)
-    {
-<tr style="text-align:center">
-    <td>
-        <h3>
-            @application.FirstName
-        </h3>
-    </td>
-    <td>
-        <h3>
-            @application.LastName
-        </h3>
-    </td>
-    <td>
-        <h3>
-            @application.AverageMark
-        </h3>
-    </td>
-    </tr>
-    }
+     {
+         <tr style="text-align:center">
+            <td>
+                <h3>
+                    @application.FirstName
+                </h3>
+            </td>
+            <td>
+                <h3>
+                    @application.LastName
+                </h3>
+            </td>
+            <td>
+                <h3>
+                    @application.AverageMark
+                </h3>
+            </td>
+        </tr>
+     }
 </table>
 

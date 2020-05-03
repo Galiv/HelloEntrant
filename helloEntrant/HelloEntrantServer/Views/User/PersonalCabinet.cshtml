@@ -42,33 +42,19 @@
         <br />
 
 
-        @if (!User.IsInRole("Administrator") && !User.IsInRole("SuperAdmin"))
+        @if (User.IsInRole("User"))
         {
             <form name="my-form" autocomplete="off" action="/User/AddTests" method="post">
 
                 <div class="form-group">
-                    <label for="ZnoModels">First ZNO</label>
-                    @*<select required="" asp-for="testHelper1.Name">*@
-                    @*<option disabled selected="selected">Ukrainian</option>*@
+                    <label for="ZnoModels">First ZNO</label>                    
                     <select required="" asp-for="testHelper1.Name" onchange="doSomething(this)">
                         <option disabled selected="selected">-- select zno --</option>
 
-                        <option name="1">Ukrainian</option>
-                        @*<option name="2">Geography</option>
-                        <option name="3">History</option>
-                        <option name="4">English</option>
-                        <option name="5">Spanish</option>
-                        <option name="6">French</option>
-                        <option name="7">German</option>
-                        <option name="8">Biology</option>
-                        <option name="9">Physics</option>
-                        <option name="10">Chemistry</option>
-                        <option name="11">Ukrainian</option>*@
+                        <option name="1">Ukrainian</option>                       
 
                     </select>
-
                 </div>
-
                 <div class="form-group">
                     <input asp-for="testHelper1.Mark" type="number" max="200" min="0" step="0.1" class="form-control" placeholder="Mark" required="" />
                 </div>

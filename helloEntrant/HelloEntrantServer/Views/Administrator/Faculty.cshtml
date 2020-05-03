@@ -18,7 +18,7 @@
                             <th scope="col" style="text-align: center">Speciality</th>
                             <th scope="col" style="text-align: center">Free Spaces</th>
                             <th scope="col" style="text-align: center">Paid Spaces</th>
-                            <th scope="col" style="text-align: center">Required ZNO</th>
+                            <th scope="col" style="text-align: center">Required Tests</th>
                             @if (User.IsInRole("User"))
                             {
                                 <th scope="col" style="text-align: center; width: 10%;"></th>
@@ -28,23 +28,23 @@
                     <tbody>
                         @foreach (var speciality in Model.Specialities)
                         {
-                        <tr style="text-align: center" onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
-                            <td>
+                        <tr style="text-align: center" >
+                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
                                 <h5>
                                     @speciality.Name
                                 </h5>
                             </td>
-                            <td>
+                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
                                 <h5>
                                     @speciality.BudgetPlaceNumber
                                 </h5>
                             </td>
-                            <td>
+                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
                                 <h5>
                                     @speciality.PaidPlaceNumber
                                 </h5>
                             </td>
-                            <td>
+                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
                                 <table>
                                     <tr>@speciality.testNeeded1</tr>
                                     <br>
@@ -61,7 +61,7 @@
                             </td>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                @if (!User.IsInRole("Administrator") && !User.IsInRole("SuperAdmin"))
+                                @if (User.IsInRole("User"))
                                 {
                                     <td>
                                         <button onclick="window.location.href = '@Url.Action("ApplyButtonExecute", "User",
@@ -83,34 +83,6 @@
             }
 
         </div>
-        @*<div class="col-3 text-center">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row m-0 p-0 rowedit">
-                        @if (User.IsInRole("UniversityAdmin") && ViewBag.iseditable)
-                        {
-                            <div class="col-1 m-0 p-0">
-                                @await Html.PartialAsync("/Views/PopUpWindows/EditFacultyPopUp.cshtml", Model.CurrentFaculty)
-                            </div>
-                        }
-                    </div>
-
-                    <p class="h4 text-center py-4">Faculty Info</p>
-
-                    <label for="" class="grey-text font-weight-light">Name</label>
-                    <input type="text" id="" class="form-control" value="@Model.CurrentFaculty.Name" readonly>
-
-                    <label for="" class="grey-text font-weight-light">Address</label>
-                    <input type="text" id="" class="form-control" value="@Model.CurrentFaculty.Address" readonly>
-
-                    <label for="" class="grey-text font-weight-light">Description</label>
-                    <textarea type="text" id="" class="form-control" style="resize: none" readonly>@Model.CurrentFaculty.Description</textarea>
-                </div>
-            </div>
-        </div>*@
-    </div>
-</div>
-
 
 @section Scripts{
 
