@@ -44,9 +44,12 @@ namespace Infrastructure.Services
             IdentityResult result = await _usermanager.CreateAsync(user, model.password);
             if (result.Succeeded)
             {
-                
+                await _usermanager.AddToRoleAsync(user, "User");
                 await _signinmanager.PasswordSignInAsync(model.email, model.password, false, false);
+
             }
+
+
 
             return result;
 

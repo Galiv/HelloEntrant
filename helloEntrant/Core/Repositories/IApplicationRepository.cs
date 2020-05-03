@@ -9,5 +9,7 @@ namespace Core.Repositories
     public interface IApplicationRepository: IRepository<Application>
     {
         Task<List<Application>> GetAllApplicationsByUserId(string userId);
+
+        Task<List<Core.Entities.Application>> GetAllApplicationsOfSpeciality(int specialityId);
     }    
 }

@@ -16,6 +16,9 @@ namespace Infrastructure.Configurations
                 .IsRequired();
             builder.Property(a => a.SpecialityId)
                 .IsRequired();
+            builder.HasOne(a => a.User).WithMany(u => u.Applications)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

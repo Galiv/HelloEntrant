@@ -19,5 +19,13 @@ namespace Infrastructure.Repositories
             return this.db.Applications
                 .Where(a => a.UserId == userId).ToListAsync();
         }
+
+        public Task<List<Core.Entities.Application>> GetAllApplicationsOfSpeciality (int specialityId)
+        {
+            return this.db.Applications
+                .Where(a => a.SpecialityId == specialityId)
+                .Include(a => a.User)
+                .ThenInclude(u => u.Test).ToListAsync();
+        }
     }
 }
