@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.IServices;
 using Core;
 using Core.Entities;
+using HelloEntrantServer.Controllers;
 using Infrastructure;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -50,6 +51,7 @@ namespace HelloEntrantServer
            .AddEntityFrameworkStores<helloEntrantContex>()
            .AddDefaultTokenProviders();
 
+            services.AddSignalR();
 
             services.AddLogging(loggingBuilder =>
             {
@@ -93,6 +95,11 @@ namespace HelloEntrantServer
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<InfoHub>("/board");
+            });
 
 
             //DataInitializer.SeedData(userManager, roleManager, contex).Wait();

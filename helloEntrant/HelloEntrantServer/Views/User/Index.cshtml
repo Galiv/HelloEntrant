@@ -5,3 +5,71 @@
 
 <h1>SecretPage</h1>
 
+
+    <ul class="list-group" id="list">
+        @*<li class="list-group-item" id="fixer">
+            <h5 class="active"> New Speciality Opened</h5><br>
+            <p>Speciality Name</p> <br>
+            <p>faculty Name</p> <br>
+            <p>100</p> <br>
+        </li>*@
+        
+    </ul>
+
+        @section Scripts{
+            <script>
+                const hubConnection = new signalR.HubConnectionBuilder()
+                    .withUrl("/board")
+                    .build();
+                  
+
+                hubConnection.on('CreateSpeciality', function (faculty, specialityName, numberOfBudgetPlaces, paidPlaceNumber, testNeeded1, testNeeded2, testNeeded3) {
+  
+            // создаем элемент <b> для имени пользователя
+                    let node = document.createElement("li");
+                    node.className = 'list-group-item'
+                    let h = document.createElement("h5");
+                    h.className = 'active';
+                    let textnode = document.createTextNode("HEY STUDENT! NEW SPECIALITY WAS CREATED!");
+                    h.appendChild(textnode);
+                    node.appendChild(h);
+
+                    let p = document.createElement("p");
+
+                    let textp = document.createTextNode("Faculty: " + faculty);
+                    p.appendChild(textp);
+                    node.appendChild(p);
+
+                    
+                    let p2 = document.createElement("p");
+                    textp = document.createTextNode("Speciality: " + specialityName);
+                    p2.appendChild(textp);
+                    node.appendChild(p2);
+
+                    let p3 = document.createElement("p");
+                    textp = document.createTextNode("Number of Budget Places: " + numberOfBudgetPlaces);
+                    p3.appendChild(textp);
+                    node.appendChild(p3);
+
+                    let p4 = document.createElement("p");
+                    textp = document.createTextNode("Number of Paid Places: " + paidPlaceNumber);
+                    p4.appendChild(textp);
+                    node.appendChild(p4);    
+
+                    let p5 = document.createElement("p");
+                    textp = document.createTextNode("Tests needed: " + testNeeded1 + ", " +  testNeeded2 + ", " + testNeeded3);
+                    p5.appendChild(textp);
+                    node.appendChild(p5);        
+
+
+                    document.getElementById('list').appendChild(node);
+
+       
+  
+        });
+
+                hubConnection.start();
+
+            </script>
+        }
+
