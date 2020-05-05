@@ -8,6 +8,7 @@ using Application.DTOs.Administrator;
 using Application.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
 namespace HelloEntrantServer.Controllers
@@ -19,11 +20,14 @@ namespace HelloEntrantServer.Controllers
 
         readonly ILogger<AdministratorController> _log;
 
+        private IHubContext<InfoHub> HubContext { get; set; }
 
-        public AdministratorController(IAdministratorService AdministratorService, ILogger<AdministratorController> log)
+
+        public AdministratorController(IAdministratorService AdministratorService, ILogger<AdministratorController> log, IHubContext<InfoHub> hubContext)
         {
             this.AdministratorService = AdministratorService;
             this._log = log;
+            this.HubContext = hubContext;
         }
 
         public IActionResult CreateFaculty()
@@ -45,7 +49,7 @@ namespace HelloEntrantServer.Controllers
             ViewBag.Faculties = await this.AdministratorService.GetFaculties(
                 await this.AdministratorService.GetUniversityId(User.Identity.Name));
 
-            //return View(new CreateSpeciality());
+           
             return View();
         }
 
@@ -58,6 +62,16 @@ namespace HelloEntrantServer.Controllers
             ViewBag.Faculties = await this.AdministratorService.GetFaculties(
                 await this.AdministratorService.GetUniversityId(User.Identity.Name));
             _log.LogInformation("Created Speciality");
+
+            await this.HubContext.Clients.All.SendAsync("CreateSpeciality", 
+                speciality.FucaltyName,
+                speciality.SpecialityName, 
+                speciality.BudgetPlaceNumber, 
+                speciality.PaidPlaceNumber,
+                speciality.TestNeeded1,
+                speciality.TestNeeded2,
+                speciality.TestNeeded3
+               );
             return View();
         }
 
