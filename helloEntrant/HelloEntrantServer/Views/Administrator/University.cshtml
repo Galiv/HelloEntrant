@@ -4,58 +4,60 @@
     ViewData["Title"] = "University";
 }
 
+    <div class="create-university" >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-2">
+                </div>
+                <div class="col-7">
 
+                    @if (Model.Faculties != null)
+                    {
+                        <table class="content-table table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="text-align: center">
+                                        <h3>Faculty</h3>
+                                    </th>
+                                    <th scope="col" style="text-align: center">
+                                        <h3>Address</h3>
+                                    </th>
+                                    @if (User.IsInRole("UniversityAdmin") && ViewBag.iseditable)
+                                    {
+                                        <th scope="col" style="text-align: center; width: 10%;">
+                                            @await Html.PartialAsync("/Views/PopUpWindows/AddFacultyPopUp.cshtml")
+                                        </th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var faculty in Model.Faculties)
+                                {
+                                    <tr style="text-align: center">
+                                        <td onclick="window.location = '@Url.Action("GetFaculty", "Administrator", new {id = faculty.FacultyId})'">
+                                            <h5>
+                                                @faculty.Name
+                                            </h5>
+                                        </td>
+                                        <td onclick="window.location = '@Url.Action("GetFaculty", "Administrator", new {id = faculty.FacultyId})'">
+                                            <h5>
+                                                @faculty.Address
+                                            </h5>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <h1>There are no faculties yet</h1>
+                    }
+
+                </div>
+            </div>
         </div>
-        <div class="col-7">
-            @if (Model.Faculties != null)
-            {
-                <table class="content-table table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="text-align: center">
-                                <h3>Faculty</h3>
-                            </th>
-                            <th scope="col" style="text-align: center">
-                                <h3>Address</h3>
-                            </th>
-                            @if (User.IsInRole("UniversityAdmin") && ViewBag.iseditable)
-                            {
-                                <th scope="col" style="text-align: center; width: 10%;">
-                                    @await Html.PartialAsync("/Views/PopUpWindows/AddFacultyPopUp.cshtml")
-                                </th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var faculty in Model.Faculties)
-                        {
-                            <tr style="text-align: center">
-                                <td onclick="window.location = '@Url.Action("GetFaculty", "Administrator", new {id = faculty.FacultyId})'">
-                                    <h5>
-                                        @faculty.Name
-                                    </h5>
-                                </td>
-                                <td onclick="window.location = '@Url.Action("GetFaculty", "Administrator", new {id = faculty.FacultyId})'">
-                                    <h5>
-                                        @faculty.Address
-                                    </h5>
-                                </td>
-                                
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <h1>There are no faculties yet</h1>
-            }
 
-        </div>        
     </div>
-</div>
-

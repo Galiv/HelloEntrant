@@ -3,40 +3,42 @@
     ViewData["Title"] = "Universities";
 }
 
-<table class="content-table table table-hover">
-    <thead>
-        <tr>
-            <th scope="col" style="text-align:center">University</th>
-            @if (User.IsInRole("SuperAdmin"))
+    <div class="create-university">
+        <table class="content-table table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align:center">University</th>
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <th scope="col" style="text-align:center">Admin</th>
+                        <th scope="col" style="text-align:center"></th>
+                    }
+                </tr>
+            </thead>
+            @foreach (var university in Model)
             {
-                <th scope="col" style="text-align:center">Admin</th>
-                <th scope="col" style="text-align:center"></th>
-            }            
-        </tr>
-    </thead>
-    @foreach (var university in Model)
-    {
-    <tr style="text-align:center" onclick="window.location = '@Url.Action("GetUniversity", "Administrator", new {id = university.UniversityId})'">
-        <td>
-            <h3>
-                @university.Name
-            </h3>
-        </td>
-    @if (User.IsInRole("SuperAdmin"))
-    {
-        <td>
-            <h3>
-                @university.User.Email
-            </h3>
-        </td>
-        <td>
-            <a class="btn btn-outline-primary waves-effect btn-sm" href="/SuperAdmin/RemoveUniversity?UniversityId=@university.UniversityId">
-                <i class="far mr-2" aria-hidden="true"></i>
-                Remove
-            </a>
-        </td>
-    }   
+                <tr style="text-align:center" onclick="window.location = '@Url.Action("GetUniversity", "Administrator", new {id = university.UniversityId})'">
+                    <td>
+                        <h3>
+                            @university.Name
+                        </h3>
+                    </td>
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <td>
+                            <h3>
+                                @university.User.Email
+                            </h3>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-primary waves-effect btn-sm" href="/SuperAdmin/RemoveUniversity?UniversityId=@university.UniversityId">
+                                <i class="far mr-2" aria-hidden="true"></i>
+                                Remove
+                            </a>
+                        </td>
+                    }
 
-    </tr>
-    }
-</table>
+                </tr>
+            }
+        </table>
+    </div>

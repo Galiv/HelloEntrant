@@ -4,7 +4,7 @@
     ViewData["Title"] = "University";
 }
 
-
+<div class="create-university">
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
@@ -28,50 +28,50 @@
                     <tbody>
                         @foreach (var speciality in Model.Specialities)
                         {
-                        <tr style="text-align: center" >
-                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
-                                <h5>
-                                    @speciality.Name
-                                </h5>
-                            </td>
-                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
-                                <h5>
-                                    @speciality.BudgetPlaceNumber
-                                </h5>
-                            </td>
-                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
-                                <h5>
-                                    @speciality.PaidPlaceNumber
-                                </h5>
-                            </td>
-                            <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
-                                <table>
-                                    <tr>@speciality.testNeeded1</tr>
-                                    <br>
-                                    @if (!string.IsNullOrWhiteSpace(speciality.testNeeded2))
-                                    {
-                                        <tr>@speciality.testNeeded2</tr>
+                            <tr style="text-align: center">
+                                <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
+                                    <h5>
+                                        @speciality.Name
+                                    </h5>
+                                </td>
+                                <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
+                                    <h5>
+                                        @speciality.BudgetPlaceNumber
+                                    </h5>
+                                </td>
+                                <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
+                                    <h5>
+                                        @speciality.PaidPlaceNumber
+                                    </h5>
+                                </td>
+                                <td onclick="window.location = '@Url.Action("GetRating", "Administrator", new {specialityId = speciality.SpecialityId})'">
+                                    <table>
+                                        <tr>@speciality.testNeeded1</tr>
                                         <br>
-                                    }
-                                    @if (!string.IsNullOrWhiteSpace(speciality.testNeeded3))
-                                    {
-                                        <tr>@speciality.testNeeded3</tr>
-                                    }
-                                </table>
-                            </td>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                @if (User.IsInRole("User"))
+                                        @if (!string.IsNullOrWhiteSpace(speciality.testNeeded2))
+                                        {
+                                            <tr>@speciality.testNeeded2</tr>
+                                            <br>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(speciality.testNeeded3))
+                                        {
+                                            <tr>@speciality.testNeeded3</tr>
+                                        }
+                                    </table>
+                                </td>
+                                @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td>
-                                        <button onclick="window.location.href = '@Url.Action("ApplyButtonExecute", "User",
+                                    @if (User.IsInRole("User"))
+                                    {
+                                        <td>
+                                            <button onclick="window.location.href = '@Url.Action("ApplyButtonExecute", "User",
                                          new { specialityId = speciality.SpecialityId, facultyId = speciality.FacultyId })';return false">
-                                            Apply
-                                        </button>
+                                                Apply
+                                            </button>
 
-                                    </td>
+                                        </td>
+                                    }
                                 }
-                            }
                             </tr>
                         }
                     </tbody>
@@ -83,7 +83,9 @@
             }
 
         </div>
-
+    </div>
+    </div>
+    </div>
 @section Scripts{
 
     <script>
