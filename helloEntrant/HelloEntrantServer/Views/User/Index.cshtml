@@ -16,7 +16,27 @@
                 </h1>
                 <img src="~/images/64f5b1e74d144c87.jpg" />
             }
+            else if(User.IsInRole("Administrator"))
+            {
+
+                <h1>
+                    Welcome back, Administrator!
+                 </h1>   
+                    <br />
+                    <img src ="~/images/not-loaded.jpg" />
+
+                    <br />
+
+            }
+            else
+            {
+                <h1>Welcome back, Super Administrator</h1>
+                <br />
+                <img src ="~/images/800ximg_1937.jpg" style="width:600px;" />
+                <br />
+            }
         }
+
             </div>
 <br />
        
