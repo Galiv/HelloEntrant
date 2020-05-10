@@ -48,9 +48,6 @@ namespace Infrastructure.Services
                 await _signinmanager.PasswordSignInAsync(model.email, model.password, false, false);
 
             }
-
-
-
             return result;
 
         }
