@@ -28,6 +28,7 @@ a {
 -------------------------------------------------- */
 html {
   font-size: 14px;
+  
 }
 @media (min-width: 768px) {
   html {
@@ -59,8 +60,10 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #808080;
+    background-image:url(/images/photo_2020-05-07_17-03-02.jpg);
 }
 .footer {
   position: absolute;
@@ -72,13 +75,20 @@ body {
 
 
 .create-university {
-    text-align:center ;
+    text-align: center;
+    background-color: #fff;
+    border: 4px solid black;
+    
+   
 }
 
 .create-university .container{
     width: 420px;
+    
+    
 }
 
 #fixer{
     width:50px;
+
 }

@@ -5,27 +5,29 @@
 
     <body class="login">
         <section class="container-fluid bg">
-            <section class="row justify-content-center">
+            <section class="row justify-content-center" >
                 <section class="col-12 col-sm-6 col-md-6">
-                    <form class="form-container" method="post" action="/Authentication/Register">
-                        <div class="form-group">
-                            <label for="UserName">Email:</label>
-                            <input type="email" class="form-control" id="UserName" name="email" aria-describedby="emailHelp" placeholder="Enter email" required="" autofocus="">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
-                        </div>
-                        <div class="form-group">
-                            <label for="Password">Password:</label>
-                            <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required="" autofocus="">
-                            @*<span asp-validation-for="Password" class="text-danger"></span>*@
-                        </div>
-                        <div class="form-group">
-                            <label for="Password">Password Confirm:</label>
-                            <input type="password" class="form-control" id="Password" name="confirmPassword" placeholder="Password Confirm" required="" autofocus="">
-                            @*<span asp-validation-for="PasswordConfirm" class="text-danger"></span>*@
-                        </div>
-                        <button type="submit" class="btn btn-success btn-block">Register</button>
-                    </form>
+                    <div class="container" style="background:#ffffff;  height:350px; border: 4px solid black;"  >
+                        <form class="form-container" method="post" action="/Authentication/Register">
+                            <div class="form-group">
+                                <label for="UserName">Email:</label>
+                                <input type="email" class="form-control" id="UserName" name="email" aria-describedby="emailHelp" placeholder="Enter email" required="" autofocus="">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password:</label>
+                                <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required="" autofocus="">
+                                @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password Confirm:</label>
+                                <input type="password" class="form-control" id="Password" name="confirmPassword" placeholder="Password Confirm" required="" autofocus="">
+                                @*<span asp-validation-for="PasswordConfirm" class="text-danger"></span>*@
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">Register</button>
+                        </form>
+                    </div>
                 </section>
             </section>
         </section>
